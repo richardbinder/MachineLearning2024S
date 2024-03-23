@@ -41,7 +41,7 @@ The Eucalyptus data set has a total of 736 entries and 19 non-target attributes.
 
 ## Obesity
 
-The Obesity data set has a total of 2111 instances and 16 non-target attributes. The attributes are of type nominal, ordinal or ratio. None of the instances have missing values
+The Obesity data set has a total of **2111 instances** and **16 non-target attributes**. The attributes are of type nominal, ordinal or ratio. None of the instances have missing values
 
 ### Obesity Attributes
 
@@ -85,7 +85,7 @@ The Obesity data set has a total of 2111 instances and 16 non-target attributes.
     - `CALC` (Alcohol consumption)
     - `MTRANS` (usually used transportation) 
     
-    Will be also receive the same processing as the ones before due to either be ordinar attributes or being nominal attibutes with more than two values.
+    Will be also receive the same processing as the ones before due to either be ordinal attributes or being nominal attributes with more than two values.
 
 - For handling nominal attributes easily, we decided to transform the nominal attributes into binary values. For example: Yes = 1, No = 0. This applies to the following attributes:
     - `Gender` (Male = 1, Female = 0)
@@ -94,7 +94,7 @@ The Obesity data set has a total of 2111 instances and 16 non-target attributes.
     - `SMOKE`
     - `SCC` (Monitoring of daily calory intake)
 
-- And for the ratio attributes, we decided to normalize them to a range of 0 to 1. This applies to the following attributes:
+- And for the ratio attributes, we decided to normalize them to a range of 0 to 1. This is done to help the model to keep all values in a similar range, helping the ML algorithm to understand the data better without losing information. This applies to the following attributes:
     - `Age`
     - `Height`
     - `Weight`
