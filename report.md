@@ -69,3 +69,14 @@ The Obesity data set has a total of 2111 instances and 16 non-target attributes.
 | Attribute | Type    | Range                      |
 |-----------|---------|----------------------------|
 | NObeyesdad (Obesity level)   | Ordinal | Insufficient Weight, Normal Weight, Overweight Level I, Overweight Level II, Obesity Type I, Obesity Type II, and Obesity Type III |
+
+### Preprocessing
+- We can see that several attributes were distributed into "categories" and then transformed into numerical values. These attributes are:
+    - FCVC (Vegetables in your meals)
+    - NCP (Amount of daily main meals)
+    - CH2O (Daily water intake)
+    - FAF (Days a week with physical activity)
+    - TUE (Daily time spent using electronic devices)
+    - MTRANS (usually used transportation)
+
+    These "categories" doesn't really have strong relationships between them (for example FCVC = 2 (Sometimes) is not "double" than FCVC = 1 ("Never")), therefore these attributes are ordinal and cannot be treated as numerical values. That's why we considered to treat them as nominal attributes, transforming each "category" into a binary attribute.
