@@ -72,23 +72,29 @@ The Obesity data set has a total of 2111 instances and 16 non-target attributes.
 
 ### Preprocessing
 - We can see that several attributes were distributed into "categories" and then transformed into numerical values. These attributes are:
-    - FCVC (Vegetables in your meals)
-    - NCP (Amount of daily main meals)
-    - CAEC (Eating food between meals)
-    - CH2O (Daily water intake)
-    - FAF (Days a week with physical activity)
-    - TUE (Daily time spent using electronic devices)
-    - CALC (Alcohol consumption)
+    - `FCVC` (Vegetables in your meals)
+    - `NCP` (Amount of daily main meals)
+    - `CH2O` (Daily water intake)
+    - `FAF` (Days a week with physical activity)
+    - `TUE` (Daily time spent using electronic devices)
 
     These "categories" doesn't really have strong relationships between them (for example FCVC = 2 (Sometimes) is not "double" than FCVC = 1 ("Never")), therefore these attributes are ordinal and cannot be treated as numerical values. That's why we considered to treat them as nominal attributes, transforming each "category" into a binary attribute.
 
-- For easly handling the data, we decided to transform the nominal attributes into binary values. For example: Yes = 1, No = 0. This applies to the following attributes:
-    - Family_history_with_overweight
-    - FAVC (Frequently high caloric food)
-    - SMOKE
-    - SCC (Monitoring of daily calory intake)
+    Also the attributes:
+    - `CAEC` (Eating food between meals)
+    - `CALC` (Alcohol consumption)
+    - `MTRANS` (usually used transportation) 
+    
+    Will be also receive the same processing as the ones before due to either be ordinar attributes or being nominal attibutes with more than two values.
+
+- For handling nominal attributes easily, we decided to transform the nominal attributes into binary values. For example: Yes = 1, No = 0. This applies to the following attributes:
+    - `Gender` (Male = 1, Female = 0)
+    - `Family_history_with_overweight`
+    - `FAVC` (Frequently high caloric food)
+    - `SMOKE`
+    - `SCC` (Monitoring of daily calory intake)
 
 - And for the ratio attributes, we decided to normalize them to a range of 0 to 1. This applies to the following attributes:
-    - Age
-    - Height
-    - Weight
+    - `Age`
+    - `Height`
+    - `Weight`
