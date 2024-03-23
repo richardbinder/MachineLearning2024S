@@ -82,4 +82,13 @@ The Obesity data set has a total of 2111 instances and 16 non-target attributes.
 
     These "categories" doesn't really have strong relationships between them (for example FCVC = 2 (Sometimes) is not "double" than FCVC = 1 ("Never")), therefore these attributes are ordinal and cannot be treated as numerical values. That's why we considered to treat them as nominal attributes, transforming each "category" into a binary attribute.
 
-- 
+- For easly handling the data, we decided to transform the nominal attributes into binary values. For example: Yes = 1, No = 0. This applies to the following attributes:
+    - Family_history_with_overweight
+    - FAVC (Frequently high caloric food)
+    - SMOKE
+    - SCC (Monitoring of daily calory intake)
+
+- And for the ratio attributes, we decided to normalize them to a range of 0 to 1. This applies to the following attributes:
+    - Age
+    - Height
+    - Weight
