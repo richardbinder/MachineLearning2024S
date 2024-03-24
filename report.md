@@ -48,9 +48,9 @@ The Obesity data set has a total of **2111 instances** and **16 non-target attri
 | Attribute                               | Type    | Range                                                |
 |-----------------------------------------|---------|------------------------------------------------------|
 | Gender                                  | Nominal | Male, Female                                         |
-| Age                                     | Ratio   | Number                                               |
-| Height                                  | Ratio   | Number in meters                                     |
-| Weight                                  | Ratio   | Number in kg                                         |
+| Age                                     | Ratio   | Number (from 14 to 61)                               |
+| Height                                  | Ratio   | Number in meters (from 1.45 to 1.98)                 |
+| Weight                                  | Ratio   | Number in kg (from 39 to 173)                        |
 | Family_history_with_overweight          | Nominal | Yes or No                                            |
 | FAVC (Frequently high caloric food)     | Nominal | Yes or No                                            |
 | FCVC (Vegetables in your meals)         | Ordinal | Never, Sometimes or Always                           |
@@ -98,3 +98,11 @@ The Obesity data set has a total of **2111 instances** and **16 non-target attri
     - `Age`
     - `Height`
     - `Weight`
+
+
+### Important Attributes
+- `NObeyesdad` (Obesity level) is the class for the Obesity dataset. It is an ordinal attribute with 7 different classes. This attribute is important because it is the attribute we want to predict.
+
+- `Weight` and `Height` are important attributes because they are the main factors that determine the obesity level of a person. Also the `Gender` attribute can influence the obesity level (BMI) for kids and teenagers between 2 and 20 years old.
+
+- `Family_history_with_overweight`, `FAVC`, `SMOKE`, `CALC`, `MTRANS`, `NCP`, `FAF` and `FCVC` are factors that can influence directly or indirectly the obesity level of a person. For example, a person that has a family history with overweight is more likely to be overweight too. Or a person that has a high caloric food consumption is more likely to be overweight. These can also be interesting attributes to be predicted since the obesity level can be calculated based on `Weight` and `Height` therefore instead of predicting the obesity level, we can predict some of these attributes to find the main reasons that lead to a certain obesity level. 
