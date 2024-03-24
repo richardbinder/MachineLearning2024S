@@ -108,3 +108,7 @@ The Obesity data set has a total of **2111 instances** and **16 non-target attri
 - `Weight` and `Height` are important attributes because they are the main factors that determine the obesity level of a person. Also the `Gender` attribute can influence the obesity level (BMI) for kids and teenagers between 2 and 20 years old.
 
 - `Family_history_with_overweight`, `FAVC`, `SMOKE`, `CALC`, `MTRANS`, `NCP`, `FAF` and `FCVC` are factors that can influence directly or indirectly the obesity level of a person. For example, a person that has a family history with overweight is more likely to be overweight too. Or a person that has a high caloric food consumption is more likely to be overweight. These can also be interesting attributes to be predicted since the obesity level can be calculated based on `Weight` and `Height` therefore instead of predicting the obesity level, we can predict some of these attributes to find the main reasons that lead to a certain obesity level. 
+
+
+### Histogram of the Obesity Dataset
+![Histogram of the Obesity Dataset](./histograms/obesity_histogram.png)
