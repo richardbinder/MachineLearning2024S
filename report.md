@@ -40,6 +40,8 @@ The Eucalyptus data set has a total of 736 entries and 19 non-target attributes.
 | Utility   | Ordinal | none,low,average,good,best |
 
 ## Obesity
+The Obesity data set, contains data from a survey of `2111 people (instances)` from Mexico, Peru and Colombia in order to determine the obesity level of the participants based on their eating habits, physical activities, etc. The data set contains `16 non-target attributes` and `1 class attribute`. The attributes are of type nominal, ordinal and ratio. None of the instances have missing values.
+
 
 The Obesity data set has a total of **2111 instances** and **16 non-target attributes**. The attributes are of type nominal, ordinal or ratio. None of the instances have missing values
 
