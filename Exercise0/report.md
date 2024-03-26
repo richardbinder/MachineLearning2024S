@@ -106,8 +106,8 @@ These can also be interesting attributes to be predicted since the obesity level
 we can predict some of these attributes to find the main reasons that lead to a certain obesity level. 
 
 
-### Histogram of the Obesity Dataset
-![Histogram of the Obesity Dataset](./histograms/obesity_histogram.png)
+### Histograms of the Obesity Dataset
+![Histogram of the Obesity Dataset](obesity_dataset/obesity_histogram.png)
 
 ## Bike Sharing
 The Bike Sharing data set contains renting data from a bike sharing system in Washington D.C. from 2011 to 2012. 
@@ -187,5 +187,5 @@ that may influence the number of bike rentals, since depending on the season, ye
 and working day, the number of bike rentals can vary. For example, people are more likely to rent bikes in the summer 
 than in the winter, or on a working day than on a holiday.
 
-### Histogram of the Bike Sharing Dataset
-![Histogram of the Bike Sharing Dataset](./histograms/bike_renting_histograms.png)
+### Histograms of the Bike Sharing Dataset
+![Histogram of the Bike Sharing Dataset](bike_dataset/bike_histogram.png)
