@@ -3,7 +3,7 @@
 
 
 # Data Set Choice
-For this excercise we chose the data sets Bike Sharing and Obesity. 
+For this exercise we chose the data sets Bike Sharing and Obesity. 
 
 ## Bike Sharing
 The Bike Sharing data set contains renting data from a bike sharing system in Washington D.C. from 2011 to 2012. The data set contains `17379 instances` and `16 non-target attributes`. The attributes are of type nominal, interval and ratio. None of the instances have missing values. This dataset aims to understand how different factors affect the number of bike rentals in a bike sharing system, including weather conditions, time of the day, holidays, etc. This dataset has not missing values.
@@ -41,7 +41,7 @@ For us this dataset is interesting to use in a "regression" context, since we ca
 | cnt       | Ratio   | Count of total rental bikes|
 
 ### Preprocessing
-To preprocess the data, we will:
+To preprocessing the data, we will:
 - Remove the `instant` attribute, since it is just an ID for the records and does not provide any useful information.
 - Remove the `dteday` attribute, since we already have the `yr`, `mnth`, `hr`, `holiday`, `weekday`, and `workingday` attributes, which provide the same information in a more useful format.
 - Transform the `season` attribute into 4 nominal attributes (winter, spring, summer, fall).
