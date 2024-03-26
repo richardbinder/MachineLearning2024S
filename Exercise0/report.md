@@ -109,6 +109,18 @@ we can predict some of these attributes to find the main reasons that lead to a 
 ### Histograms of the Obesity Dataset
 ![Histogram of the Obesity Dataset](obesity_dataset/obesity_histogram.png)
 
+In these histograms, we can see the distribution of the attributes in the Obesity dataset. We can see that the information in the database is mainly about young people between 15 and 25 years old.
+
+We can see that the height of the people is mainly between 1.6 and 1.8 meters, and has the same behavior of a normal distribution. For the weight most people is around  80 kg, however we can see that the distribution of people whose weight is between 60 kg and 65 kg is pretty (~400 people) similar to the distribution of people whose weight is between 100 kg and 120 kg.
+
+For some possible causes of obesity, we can see that most people have a family history with overweight. Also, the factors that seem to be more significant to predict the obesity level are related to the eating habits of the people and the physical activities they do.
+
+For one hand we can see that ~80% of the people affirm that they frequently eat high caloric food (`FAVC`), ~90% of the people affirm that they do not monitor their daily calory intake (`SCC`), and ~50% of the people affirm that they occasionally consume alcohol (`CALC`).
+
+And for the other hand we can see that ~30% affirm they don't do any kind of physical activities (`FAF`), ~95% affirm that their most usual way of transportation is by car or public transportation (`MTRANS`).
+
+Finally, we can see that among all participants ~15% of them have normal weight, ~15% have insufficient weight, ~30% have some level of overweight, and ~40% have some level of obesity (`NObeyesdad`).
+
 ## Bike Sharing
 The Bike Sharing data set contains renting data from a bike sharing system in Washington D.C. from 2011 to 2012. 
 The data set contains `17379 instances` and `16 non-target attributes`. 
@@ -134,7 +146,7 @@ since we can predict the number of bike rentals based on the weather conditions,
 | holiday     | Nominal  | 0: no, 1: yes                                                                           |
 | weekday     | Ordinal  | 0 to 6                                                                                  |
 | workingday  | Nominal  | 0: no, 1: yes                                                                           |
-| weathersit  | Nominal  | 1 to 4 (various weather conditions)                                                     |
+| weathersit  | Nominal  | 1 to 4 (various weather conditions) 	                                                   |
 | temp        | Ratio    | Normalized temperature in Celsius (0.02 to 1). The values are divided to 41 (max)       |
 | atemp       | Ratio    | Normalized feeling temperature in Celsius  (0 to 1). The values are divided to 50 (max) |
 | hum         | Ratio    | Normalized humidity (0 to 1). The values are divided to 100 (max).                      |
@@ -143,6 +155,11 @@ since we can predict the number of bike rentals based on the weather conditions,
 | registered  | Ratio    | Count of registered users   (0 to 886)                                                  |
 | cnt         | Ratio    | Count of total rental bikes (1 to 977)                                                  |
 
+`weathersit` attribute values:
+- 1: Clear, Few clouds, Partly cloudy, Partly cloudy
+- 2: Mist + Cloudy, Mist + Broken clouds, Mist + Few clouds, Mist
+- 3: Light Snow, Light Rain + Thunderstorm + Scattered clouds, Light Rain + Scattered clouds
+- 4: Heavy Rain + Ice Pallets + Thunderstorm + Mist, Snow + Fog
 
 ### Bike Sharing Target Attribute
 
@@ -189,3 +206,11 @@ than in the winter, or on a working day than on a holiday.
 
 ### Histograms of the Bike Sharing Dataset
 ![Histogram of the Bike Sharing Dataset](bike_dataset/bike_histogram.png)
+
+In these histograms, we can see the distribution of the attributes in the Bike Sharing dataset. We can see the `weather situation` (weather condition) in the dataset are mainly good with ~60% of the days having good weather and ~20% having misty weather. Also we can see that the `wind speed` is mainly between 0 and 0.2, which means that most of the days wind speed is not higher than 13.4 km/h which is a good condition to ride a bike.
+
+Also we can see the distribution of users that rent bikes in the dataset. We can see that the number of `casual users` is mainly between 0 and 25, which means in an hour the number of casual users that rent a bike is not higher than 25, this is the higher group of users that rent bikes in the dataset with around 10000 rents in total. However, this number drops significantly for bigger numbers of casual users that rent bikes in an hour.
+
+The number of `registered users` is mainly between 0 and 50, which means that most of the hours the number of registered users that rent a bike is not higher than 50, this is the higher group of users that rent bikes in the dataset with around 5800 rents in total. This number drops significantly for bigger numbers of registered users that rent bikes in an hour, but in comparison to `casual users` this drop is not as big, so we can see that the `register users` group is more stable than the `casual users` group.
+
+Finally, we can see the distribution of the `total number of bikes rented` in the dataset has a pretty similar trend to the `register users` group, which means that the number of bikes rented in an hour by casual or register users is mainly between 0 and 25 (~30%).
