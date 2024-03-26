@@ -3,11 +3,11 @@
 
 
 # Data Set Choice
-Eucalyptus and Obesity
+For this excercise we chose the data sets Eucalyptus and Obesity. 
 
 ## Eucalyptus
 
-The Eucalyptus data set has a total of 736 entries and 19 non-target attributes. The attributes are of type nominal, interval or ratio. 95 of the instances have missing values, which totals to 448 missing values.
+The Eucalyptus data set has a total of 736 entries of different eucalyptus seedlots planted in different regions of New Zealand. The goal if to determin, which seedlot is the best for soil conservation. The data set has a total of 19 non-target attributes. The attributes are of type nominal, interval or ratio. 95 of the instances have missing values, which totals to 448 missing values. The cause of this seems to be the death of some species or omited measurements.
 
 ### Eucalyptus Attributes
 
@@ -39,11 +39,29 @@ The Eucalyptus data set has a total of 736 entries and 19 non-target attributes.
 |-----------|---------|----------------------------|
 | Utility   | Ordinal | none,low,average,good,best |
 
+### Preprocessing
+For the nominal values of this data set we will transform them all into binary attributes. So this will affect the attributes
+- `Abbrev`
+- `Localit`
+- `Map_Ref`
+- `Latitude`
+- `SP`
+- `PMCno`
+
+Since this data set does not contain ordinal attributes, the remaining ones, which are either of type interval or ratio, will be normalized between 0 and 1.
+
+Regarding the missing values. Since most of instances are complete and the ones, which are missing a few of their values, are having this lack of data in mostly less significant attributes, we do not think that deleting either the column or the entire row would be the correct aproach. Especially, since this already is a smaller data set. Therefore we would probably benefit the most, when using a form of imputation.
+
+### Important Attributes
+- As mentioned earlier in the description `SP` and `PMCno` or the species and seedlot attribute are very important, since the goal is to determine, wich of those has the most potential, when planted.
+
+- Also important is the measured data of the plants, especially the survival rate `Surv`, height `Hat` and diameter by height `DBH`, which seem to be very indicative of a favourable seedlot and or species.
+
+### Histogram of the Eucalyptus Dataset
+![Histogram of the Eucalyptus Dataset](./histograms/eucalyptus_histograms.png)
+
 ## Obesity
 The Obesity data set, contains data from a survey of `2111 people (instances)` from Mexico, Peru and Colombia in order to determine the obesity level of the participants based on their eating habits, physical activities, etc. The data set contains `16 non-target attributes` and `1 class attribute`. The attributes are of type nominal, ordinal and ratio. None of the instances have missing values.
-
-
-The Obesity data set has a total of **2111 instances** and **16 non-target attributes**. The attributes are of type nominal, ordinal or ratio. None of the instances have missing values
 
 ### Obesity Attributes
 
