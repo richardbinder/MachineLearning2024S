@@ -46,7 +46,6 @@ To preprocess the data, we will:
 - Remove the `dteday` attribute, since we already have the `yr`, `mnth`, `hr`, `holiday`, `weekday`, and `workingday` attributes, which provide the same information in a more useful format.
 - Transform the `season` attribute into 4 nominal attributes (winter, spring, summer, fall).
 - Transform the `weathersit` attribute into 4 nominal attributes (one for each weather condition).
-- Transform the `weekday` attribute into 7 nominal attributes (one for each day of the week).
 
 
 ### Important Attributes
