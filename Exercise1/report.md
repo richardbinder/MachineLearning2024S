@@ -7,11 +7,12 @@
 # Dataset #1 - Breast Cancer
 ## Exploratory
 ### Description of the dataset
-The "Breast cancer diagnostic" dataset contains 32 attributes and 569 instances. The attributes and instances are described as follows:
+The "Breast cancer diagnostic" dataset contains 32 attributes and 285 instances. The attributes and instances are described as follows:
 
 - Instances:
-    - Training: 285
-    - Validation: 284
+    - Training: 213 instances (75% of the dataset)
+    - Validation: 72 instances (25% of the dataset)
+    - Total: 285 instances
 - Attributes:
     - id:
         - `Description`: ID of the person.
