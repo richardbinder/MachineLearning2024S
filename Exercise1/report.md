@@ -82,33 +82,97 @@ The results of the tests are shown in the following tables:
 | True    | 19 ("Optimal") | uniform | 0.972   | 0.98      | 0.97   | 0.972|
 | True    | 19 ("Optimal") | distance| 0.972   | 0.98      | 0.97   | 0.972|
 
-In this test we test both scaled data
 
 #### KNN with feature selection (importance > 0.05)
 | scaling | k             | weights | Accuracy | Precision | Recall | F1  |
 |---------|---------------|---------|----------|-----------|--------|-----|
 | False   | 10            | uniform | 0.916     | 0.94      | 0.90   | 0.914|
+| False   | 10            | distance | 0.93     | 0.946      | 0.916   | 0.929|
 | False   | 5 ("Optimal") | uniform | 0.93     | 0.94      | 0.92   | 0.929|
+| False   | 5 ("Optimal") | distance | 0.944     | 0.948      | 0.938   | 0.944|
 | True    | 10            | uniform | 0.944     | 0.95      | 0.94   | 0.944|
+| True    | 10            | distance | 0.958     | 0.959      | 0.954   | 0.958|
 | True    | 18 ("Optimal") | uniform | 0.972   | 0.98      | 0.97   | 0.972|
+| True    | 18 ("Optimal") | distance | 0.972   | 0.972      | 0.966   | 0.972|
 
 
 #### KNN with feature selection (importance > 0.1)
 | scaling | k             | weights | Accuracy | Precision | Recall | F1  |
 |---------|---------------|---------|----------|-----------|--------|-----|
-| False   | 10            | uniform | 0.88     | 0.91      | 0.87   | 0.886|
-| False   | 9 ("Optimal") | uniform | 0.902    | 0.91      | 0.89   | 0.901|
+| False   | 10            | uniform | 0.88     | 0.906     | 0.87   | 0.886|
+| False   | 10            | distance | 0.88    | 0.906     | 0.87   | 0.886|
+| False   | 9 ("Optimal") | uniform | 0.902    | 0.907      | 0.89   | 0.901|
+| False   | 9 ("Optimal") | distance | 0.88    | 0.906      | 0.87   | 0.886|
 | True    | 10            | uniform | 0.94     | 0.95      | 0.94   | 0.944|
+| True    | 10            | distance | 0.958     | 0.959     | 0.954   | 0.958|
 | True    | 3 ("Optimal") | uniform | 0.94     | 0.95      | 0.94   | 0.944|
+| True    | 3 ("Optimal") | distance | 0.94     | 0.948      | 0.938   | 0.944|
 
-
-#### KNN with all features
-| scaling | k             | weights | Accuracy | Precision | Recall | F1  |
-|---------|---------------|---------|----------|-----------|--------|-----|
-| True    | 19 ("Optimal") | distance| 0.972   | 0.98      | 0.97   | 0.972|
 
 
 ### Neural Networks
+
+#### Neural network with all features
+##### Neural network with all features and no scaling
+| scaling   | hidden_layers   | activation   | solver   |   Accuracy |   Precision |   Recall |       F1 |
+|:----------|:----------------|:-------------|:---------|-----------:|------------:|---------:|---------:|
+| False     | (5, 3)          | relu         | adam     |   0.819444 |    0.860477 | 0.788095 | 0.809631 |
+| False     | (5, 3)          | relu         | lbfgs    |   0.583333 |    0.291667 | 0.5      | 0.429825 |
+| False     | (5, 3)          | relu         | sgd      |   0.583333 |    0.291667 | 0.5      | 0.429825 |
+| False     | (5, 3)          | identity     | adam     |   0.819444 |    0.860477 | 0.788095 | 0.809631 |
+| False     | (5, 3)          | identity     | lbfgs    |   0.583333 |    0.291667 | 0.5      | 0.429825 |
+| False     | (5, 3)          | identity     | sgd      |   0.916667 |    0.926421 | 0.904762 | 0.915584 |
+| False     | (5, 3)          | logistic     | adam     |   0.861111 |    0.903846 | 0.833333 | 0.85461  |
+| False     | (5, 3)          | logistic     | lbfgs    |   0.875    |    0.885532 | 0.859524 | 0.872829 |
+| False     | (5, 3)          | logistic     | sgd      |   0.583333 |    0.291667 | 0.5      | 0.429825 |
+| False     | (5, 3)          | tanh         | adam     |   0.916667 |    0.926421 | 0.904762 | 0.915584 |
+| False     | (5, 3)          | tanh         | lbfgs    |   0.583333 |    0.291667 | 0.5      | 0.429825 |
+| False     | (5, 3)          | tanh         | sgd      |   0.625    |    0.804348 | 0.55     | 0.517199 |
+
+
+With the results of the tests, we can see that the best results were obtained with the following hyperparameters:
+- Hyperparameters #1:
+    - `activation`: identity
+    - `solver`: sgd
+    - `F1-score`: 0.915584
+- Hyperparameters #2:
+    - `activation`: tanh
+    - `solver`: adam
+    - `F1-score`: 0.915584
+
+##### Neural network with all features and scaling
+| scaling   | hidden_layers   | activation   | solver   |   Accuracy |   Precision |   Recall |       F1 |
+|:----------|:----------------|:-------------|:---------|-----------:|------------:|---------:|---------:|
+| True      | (5, 3)          | relu         | adam     |   0.972222 |    0.977273 | 0.966667 | 0.972066 |
+| True      | (5, 3)          | relu         | lbfgs    |   0.958333 |    0.955547 | 0.959524 | 0.958424 |
+| True      | (5, 3)          | relu         | sgd      |   0.944444 |    0.956522 | 0.933333 | 0.943723 |
+| True      | (5, 3)          | identity     | adam     |   0.972222 |    0.977273 | 0.966667 | 0.972066 |
+| True      | (5, 3)          | identity     | lbfgs    |   0.944444 |    0.940625 | 0.947619 | 0.944663 |
+| True      | (5, 3)          | identity     | sgd      |   0.972222 |    0.977273 | 0.966667 | 0.972066 |
+| True      | (5, 3)          | logistic     | adam     |   0.972222 |    0.977273 | 0.966667 | 0.972066 |
+| True      | (5, 3)          | logistic     | lbfgs    |   0.958333 |    0.955547 | 0.959524 | 0.958424 |
+| True      | (5, 3)          | logistic     | sgd      |   0.583333 |    0.291667 | 0.5      | 0.429825 |
+| True      | (5, 3)          | tanh         | adam     |   0.972222 |    0.977273 | 0.966667 | 0.972066 |
+| True      | (5, 3)          | tanh         | lbfgs    |   0.958333 |    0.955547 | 0.959524 | 0.958424 |
+| True      | (5, 3)          | tanh         | sgd      |   0.972222 |    0.977273 | 0.966667 | 0.972066 |
+
+
+
+
+#### Neural network with feature selection (importance > 0.05)
+| scaling | hidden_layers   | activation | solver | Accuracy | Precision | Recall | F1   |
+|---------|-----------------|------------|--------|----------|-----------|--------|------|
+| False   | (5, 3)          | relu       | adam   | 0.944    | 0.948     | 0.938  | 0.944|
+
+As mentioned before, for these tests changing the activation function and solver did not affect the results.
+
+#### Neural network with feature selection (importance > 0.1)
+| scaling | hidden_layers   | activation | solver | Accuracy | Precision | Recall | F1   |
+|---------|-----------------|------------|--------|----------|-----------|--------|------|
+| False   | (5, 3)          | relu       | adam   | 0.888    | 0.906     | 0.871  | 0.886|
+
+As mentioned before, for these tests changing the activation function and solver did not affect the results.
+
 ### Random Forest
 
 ## Conclusions
