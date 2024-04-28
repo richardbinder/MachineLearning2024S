@@ -339,6 +339,10 @@ Finally, feature selection had an impact on all tree models. For one hand we cou
 The "Loan application" dataset contains 92 attributes and both the training and test set contain 10000 instances each. The target attribute is the "grade" feature, which ranges between A and G. The remaining attributes, not counting the "ID", describe different aspects of a loan application, like the requested amount or the annual income of the applicant.
 
 ### visualization
+In the following histograms we can see the distribution of the attributes in the dataset for the 10 most important attributes, of which the interest rate is by far the most crucial one, when it comes to determining the loan application.
+
+#### 10 most important attributes of the Loan dataset
+![Histogram of the Eucalyptus Dataset](./Loan-10k/loan_histograms.png)
 
 ## Preprocessing of the data
 - `Missing values`: There are no missing values in the dataset.
@@ -358,43 +362,44 @@ With only one hot encoding of some attributes and lable encoding the grade and d
 For the KNN classifier in combination with the loan dataset, we made the following tests. We first used the Dataset with only the modifications mentioned above, then we used the same dataset but without scaling and finally we used the dataset with certain attributes dropped as explained earlier. For each of those we alternated between using the `uniform` and `distance` setting for the weights. We also made tests with 5, 10 and the optimal value for the neighbors (k). For the cross validation we took the splitting value 5 for each test.
 
 #### KNN All features
-| scaling | k   | weights  | accuracy | precision | recall   | f1_score | avg_cross | runtime_holdout | runtime_cross |
-| ------- | --- | -------- | -------- | --------- | -------- | -------- | --------- | --------------- | ------------- |
+| scaling | k              | weights  | accuracy | precision | recall   | f1_score | avg_cross | runtime_holdout | runtime_cross |
+| ------- | ---            | -------- | -------- | --------- | -------- | -------- | --------- | --------------- | ------------- |
 | True    | 13 ("Optimal") | uniform  | 0.395    | 0.276139  | 0.240458 | 0.362776 | 0.387800  | 0.6875          | 1.484375      |
 | True    | 15 ("Optimal") | distance | 0.398    | 0.234735  | 0.235989 | 0.369370 | 0.3996    | 0.21875         | 1.609375      |
-| True    | 5   | uniform  | 0.391    | 0.418898  | 0.256410 | 0.364270 | 0.3719    | 0.625           | 1.234375      |
-| True    | 10  | uniform  | 0.377    | 0.252202  | 0.229392 | 0.346841 | 0.383200  | 0.65625         | 1.515625      |
-| False   | 17  | uniform  | 0.334    | 0.326540  | 0.193620 | 0.301402 | 0.3195    | 0.71875         | 1.609375      |
-| False   | 10  | distance | 0.342    | 0.234906  | 0.204905 | 0.322429 | 0.3151    | 0.25            | 1.484375      |
-| False   | 5   | uniform  | 0.316    | 0.334999  | 0.199847 | 0.295386 | 0.302     | 0.546875        | 1.46875       |
-| False   | 10  | uniform  | 0.331    | 0.238360  | 0.199352 | 0.308133 | 0.3122    | 0.671875        | 1.5625        |
+| True    | 5              | uniform  | 0.391    | 0.418898  | 0.256410 | 0.364270 | 0.3719    | 0.625           | 1.234375      |
+| True    | 10             | uniform  | 0.377    | 0.252202  | 0.229392 | 0.346841 | 0.383200  | 0.65625         | 1.515625      |
+| False   | 17             | uniform  | 0.334    | 0.326540  | 0.193620 | 0.301402 | 0.3195    | 0.71875         | 1.609375      |
+| False   | 10             | distance | 0.342    | 0.234906  | 0.204905 | 0.322429 | 0.3151    | 0.25            | 1.484375      |
+| False   | 5              | uniform  | 0.316    | 0.334999  | 0.199847 | 0.295386 | 0.302     | 0.546875        | 1.46875       |
+| False   | 10             | uniform  | 0.331    | 0.238360  | 0.199352 | 0.308133 | 0.3122    | 0.671875        | 1.5625        |
 
 #### KNN Features with importance <0.01 dropped
-| scaling | k   | weights  | accuracy | precision | recall   | f1_score | avg_cross | runtime_holdout | runtime_cross |
-| ------- | --- | -------- | -------- | --------- | -------- | ---------| --------- | --------------- | ------------- |
+| scaling | k              | weights  | accuracy | precision | recall   | f1_score | avg_cross | runtime_holdout | runtime_cross |
+| ------- | ---            | -------- | -------- | --------- | -------- | ---------| --------- | --------------- | ------------- |
 | True    | 17 ("Optimal") | uniform  | 0.557    | 0.390044  | 0.348131 | 0.530821 | 0.547300  | 0.625           | 0.890625      |
 | True    | 9 ("Optimal")  | distance | 0.575    | 0.496415  | 0.391234 | 0.561423 | 0.549500  | 0.109375        | 0.703125      |
-| True    | 5   | uniform  | 0.536    | 0.371356  | 0.344722 | 0.515736 | 0.520400  | 0.390625        | 0.671875      |
-| True    | 10  | uniform  | 0.549    | 0.377437  | 0.342108 | 0.524174 | 0.538     | 0.46875         | 0.71875       |
+| True    | 5              | uniform  | 0.536    | 0.371356  | 0.344722 | 0.515736 | 0.520400  | 0.390625        | 0.671875      |
+| True    | 10             | uniform  | 0.549    | 0.377437  | 0.342108 | 0.524174 | 0.538     | 0.46875         | 0.71875       |
 
 #### KNN Features with importance <0.015 dropped
-| scaling | k   | weights  | accuracy | precision | recall   | f1_score | avg_cross | runtime_holdout | runtime_cross |
-| ------- | --- | -------- | -------- | --------- | -------  | -------- | --------- | --------------- | ------------- |
+| scaling | k              | weights  | accuracy | precision | recall   | f1_score | avg_cross | runtime_holdout | runtime_cross |
+| ------- | ---            | -------- | -------- | --------- | -------  | -------- | --------- | --------------- | ------------- |
 | True    | 15 ("Optimal") | uniform  | 0.804    | 0.580975  | 0.558948 | 0.793379 | 0.8041    | 0.109375        | 0.953125      |
 | True    | 12 ("Optimal") | distance | 0.81     | 0.748677  | 0.590682 | 0.802252 | 0.8082    | 0.046875        | 0.25          |
-| True    | 5   | uniform  | 0.793    | 0.739807  | 0.590509 | 0.786113 | 0.7965    | 0.09375         | 0.859375      |
-| True    | 10  | uniform  | 0.787    | 0.702714  | 0.558854 | 0.776777 | 0.800900  | 0.09375         | 0.921875      |
+| True    | 5              | uniform  | 0.793    | 0.739807  | 0.590509 | 0.786113 | 0.7965    | 0.09375         | 0.859375      |
+| True    | 10             | uniform  | 0.787    | 0.702714  | 0.558854 | 0.776777 | 0.800900  | 0.09375         | 0.921875      |
 
 ### KNN Features with importance <0.02 dropped
-| scaling | k   | weights  | accuracy | precision | recall   | f1_score | avg_cross | runtime_holdout | runtime_cross |
-| ------- | --- | -------- | -------- | --------- | -------  | -------- | --------- | --------------- | ------------- |
+| scaling | k              | weights  | accuracy | precision | recall   | f1_score | avg_cross | runtime_holdout | runtime_cross |
+| ------- | ---            | -------- | -------- | --------- | -------  | -------- | --------- | --------------- | ------------- |
 | True    | 15 ("Optimal") | uniform  | 0.859    | 0.657848  | 0.622020 | 0.851054 | 0.8637    | 0.078125        | 0.734375      |
 | True    | 18 ("Optimal") | distance | 0.861    | 0.819618  | 0.646044 | 0.854941 | 0.873499  | 0.015625        | 0.078125      |
-| True    | 5   | uniform  | 0.844    | 0.808206  | 0.649476 | 0.839222 | 0.865500  | 0.0625          | 0.71875       |
-| True    | 10  | uniform  | 0.856    | 0.790931  | 0.625466 | 0.848038 | 0.864899  | 0.078125        | 0.703125      |
+| True    | 5              | uniform  | 0.844    | 0.808206  | 0.649476 | 0.839222 | 0.865500  | 0.0625          | 0.71875       |
+| True    | 10             | uniform  | 0.856    | 0.790931  | 0.625466 | 0.848038 | 0.864899  | 0.078125        | 0.703125      |
 
 As this was a very feature heavy dataset, we expected that dropping several attributes would significantly improve the classification, which it did. The improvement can also be found in every metric that we measured. The best performing setting for both the holdout and cross validation was the one, where we dropped every attribute with importance <0.02, used the optimal k and set the weights to `distance`. Also the in general the cross validation performed better than the holdout method. Another noticeable aspect is the reduction in runtime the more attributes are left out, which also makes sense, as less data needs to be processed. Similar to our previous dataset, using the unscaled dataset causes a drop in all result metrics, since again the larger numbers tamper with the distances in the model.
 
+In comparison to the other two classifications, which will be discussed below, the KNN classification was the most sensitive to changes in the dataset and performed very poorly, if almost no preprocessing was done.
 
 ### Neural Network
 For the combination of the loan dataset and the Neural Network classification, we used the following settings and datasets for our tests. In comparison to the KNN classification we did not use the dataset, where we dropped every attribute with importance below 0.02 and we also left out the unscaled dataset. Instead, we focused on trying out multiple combinations of settings the model offers. For the hidden layers we tested a (5,3) and (20, 10, 5) structure, for the activation we alternated between `relu`, `identity`, `logistic` and `tanh`, and for the solver we tested `adam`, `lbfgs` and `sgd`.
@@ -488,7 +493,7 @@ Comparing the different datasetsm lets one see, that dropping the less important
 In comparison to the KNN classification, the Neural Network performed a lot better on average. It also produced multiple solutions, which were better than our best KNN solution for both the holdout and cross validation. On the other hand, in terms of runtime, the Neural Network took many times longer than the KNN. This might become an inconvenience with even larger data sets. Also the KNN classification significantly benefited from the much smaller datasets, which focused only on the most important attributes.
 
 ### Random Forest
-For the combination of the loan dataset and the Random Forest classification, we used the following settings and datasets for our tests. Similar to the KNN classification, we again used all 5 different versions of the dataset. As for the settings of the Random Forest classification, for the leafs we used a combination of 5, 100 and 5000 nodes, for the max depth we used the values 5, 20 and 1000, and for the maximum features we used 5 and 20.
+For the combination of the loan dataset and the Random Forest classification, we used the following settings and datasets for our tests. Similar to the KNN classification, we again used all 5 different versions of the dataset. As for the settings of the Random Forest classification, for the leaves we used a combination of 5, 100 and 5000 nodes, for the max depth we used the values 5, 20 and 1000, and for the maximum features we used 5 and 20.
 
 #### Random Forest All features
 | scaling   |   leaf_nodes |   max_depth |   max_features |   Accuracy |   Precision |   Recall |       F1 |   avg_cross |   runtime_holdout |   runtime_cross |
@@ -595,6 +600,31 @@ For the combination of the loan dataset and the Random Forest classification, we
 | True      |         5000 |          20 |             20 |      0.779 |    0.616207 | 0.618703 | 0.775538 |      0.9222 |          0.875    |         4.14062 |
 | True      |         5000 |        1000 |              5 |      0.778 |    0.615315 | 0.618233 | 0.774592 |      0.9221 |          0.828125 |         4.15625 |
 | True      |         5000 |        1000 |             20 |      0.778 |    0.615315 | 0.618233 | 0.774592 |      0.9221 |          0.890625 |         4.14062 |
+
+
+Even though this dataset includes a lot of features, as the results already suggest, depending on the importance threshhold, there are sometimes not enough features left in the data for the `max features` setting to have any impact, which is why some results are the same. Interestingly the best result used the unscaled data set and a combination of 5000 leaf nodes, 1000 max depth and 20 max features. Generally, the settings with fewer leaf nodes performed better on the datasets with less attributes and vice versa incrasing the amount of leaves on the data sets with many attributes also increrase the performance. Regarding the `max depth`, most of the time the increase from 5 to 20 had a larger impact on the result than the change from 20 to 1000. Also this performance change tended to be a quality increase for the attribute heavy datasets and a quality decrease for the datasets with fewer attributes. Looking at the `max features`, at those tests where it made a difference, one can see a noticeable betterment of the result after the increase to 20.
+
+In contrast to the other two classifications, the Random Forest is the only one with some kind of benefit from unscaled data, if only looking at the best solution. The Random Forest also ran similarly quick using holdout but was the slowest when using cross validation and the dataset, which still had most attributes in it. On the positive side, using cross validation resulted in the best solutions across all three classifications.
+
+## Conclusions
+
+### Best results by model:
+
+| Model           | scaling | settings                 | accuracy | precision | recall   | f1_score | avg_cross | runtime_holdout | runtime_cross |
+|:----------|-------------:|------------:|---------------:|-----------:|------------:|---------:|---------:|------------:|------------------:|
+| KNN             | False   | k = 18 ("Optimal"), weights = distance | 0.861    | 0.819618  | 0.646044 | 0.854941 | 0.873499  | 0.015625        | 0.078125      |
+| Neural networks | True      | hidden_layers = (5, 3), activation = identity, solver = lbfgs |      0.883 |   0.849155  | 0.730724 |   0.879921 |      0.876  |           1.01562 |         6.14062 |
+| Random forest   | False      | leaf_nodes = 5000, max_depth = 1000, max_features = 20 |      0.882 |    0.715351 | 0.621326 | 0.870345 |      0.8686 |          4.53125  |        18.9531  |
+
+### Worst results by model:
+
+| Model           | scaling | settings                 | accuracy | precision | recall   | f1_score | avg_cross | runtime_holdout | runtime_cross |
+|:----------|-------------:|------------:|---------------:|-----------:|------------:|---------:|---------:|------------:|------------------:|
+| KNN             | False   | k = 5, weights = uniform | 0.316    | 0.334999  | 0.199847 | 0.295386 | 0.302     | 0.546875        | 1.46875       |
+| Neural networks | True      | hidden_layers = (20, 10, 5), activation = logistic, solver = sgd |      0.304 |   0.0434286 | 0.142857 |   0.141742 |      0.2989 |          2.96875  |        13.8281  |
+| Random forest   | True      | leaf_nodes = 5, max_depth = 5/20/1000, max_features = 5 |      0.55  |    0.295686 | 0.290747 | 0.446309 |      0.5808 |          0.40625  |         2.03125 |
+
+In general, all the models performed almost equally well on their best settings, with the Neural Network and Random Forest more or less sharing the first place. The Random Forest also seems to be the most "robuts" model, with its worst performance still being significantly better thant the worst KNN and Neural Network results. Also, the results produced by the cross validation, were consistently better than the hold out solutions.
 
 # Dataset #3 - Estimation of Obesity Levels 
 
@@ -849,6 +879,8 @@ Below is a summary of the best found preprocessing and parameter choices for eac
 The Eucalyptus data set has a total of 736 entries of different eucalyptus seedlots planted in different regions of New Zealand. The goal if to determin, which seedlot is the best for soil conservation. The data set has a total of 20 attributes describing the location, weather and quality of the plant. The target attribute is called `Utility` and can take on the the values `none`, `low`, `average`, `good` and `best`. In contrast to the other used datasets, the eucalyptus dataset also has some missing values.
 
 ### visualization
+In the following histograms we can see the distribution of the attributes in the dataset for the most important attributes, of which especially Surv, Vig, Ins_res, Stem_Fm, Crown_Fm and Brnch_Fm are very crucial for the classification. It also displays the distribution of the target attribute `Utility`.
+
 ![Histogram of the Eucalyptus Dataset](./Eucalyptus/eucalyptus_histograms.png)
 
 ## Preprocessing of the data
@@ -862,45 +894,52 @@ The Eucalyptus data set has a total of 736 entries of different eucalyptus seedl
 ## Results
 ### KNN
 
+For the KNN classifier in combination with the Eucalyptus dataset, we used the same setting as with the Loan dataset. So, we alternated between the `uniform` and `distance` setting and used 5, 10 or the optimal k value. Also we again went with the 5 different dataset variantions.
+
 #### KNN All features
-| scaling | k   | weights  | accuracy | precision | recall   | f1_score | avg_cross | runtime_holdout | runtime_cross |
-| ------- | --- | -------- | -------- | --------- | ------   | -------- | --------- | --------------- | ------------- |
+| scaling | k              | weights  | accuracy | precision | recall   | f1_score | avg_cross | runtime_holdout | runtime_cross |
+| ------- | ---            | -------- | -------- | --------- | ------   | -------- | --------- | --------------- | ------------- |
 | True    | 11 ("Optimal") | uniform  | 0.441176 | 0.488048  | 0.418730 | 0.431788 | 0.422163  | 0               | 0.09375       |
 | True    | 16 ("Optimal") | distance | 0.397058 | 0.521351  | 0.379047 | 0.384234 | 0.462596  | 0               | 0.125         |
-| True    | 5   | uniform  | 0.338235 | 0.345604  | 0.305714 | 0.339905 | 0.393592  | 0               | 0.125         |
-| True    | 10  | uniform  | 0.367647 | 0.4125    | 0.354285 | 0.347021 | 0.404152  | 0               | 0.0625        |
+| True    | 5              | uniform  | 0.338235 | 0.345604  | 0.305714 | 0.339905 | 0.393592  | 0               | 0.125         |
+| True    | 10             | uniform  | 0.367647 | 0.4125    | 0.354285 | 0.347021 | 0.404152  | 0               | 0.0625        |
 | False   | 1 ("Optimal")  | uniform  | 0.588235 | 0.646956  | 0.625396 | 0.589751 | 0.528470  | 0.046875        | 0.109375      |
 | False   | 1 ("Optimal")  | distance | 0.588235 | 0.646956  | 0.625396 | 0.589751 | 0.528470  | 0.125           | 0.15625       |
-| False   | 5   | uniform  | 0.426470 | 0.486282  | 0.452380 | 0.420282 | 0.491011  | 0               | 0.15625       |
-| False   | 10  | uniform  | 0.382352 | 0.425952  | 0.394920 | 0.372564 | 0.513466  | 0               | 0.09375       |
+| False   | 5              | uniform  | 0.426470 | 0.486282  | 0.452380 | 0.420282 | 0.491011  | 0               | 0.15625       |
+| False   | 10             | uniform  | 0.382352 | 0.425952  | 0.394920 | 0.372564 | 0.513466  | 0               | 0.09375       |
 
 #### KNN Features with importance <0.01 dropped
-| scaling | k   | weights  | accuracy | precision | recall   | f1_score | avg_cross | runtime_holdout | runtime_cross |
-| ------- | --- | -------- | -------- | --------- | ------   | -------- | --------- | --------------- | ------------- |
+| scaling | k              | weights  | accuracy | precision | recall   | f1_score | avg_cross | runtime_holdout | runtime_cross |
+| ------- | ---            | -------- | -------- | --------- | ------   | -------- | --------- | --------------- | ------------- |
 | True    | 6 ("Optimal")  | uniform  | 0.529411 | 0.692208  | 0.573650 | 0.534284 | 0.535921  | 0.015625        | 0.046875      |
 | True    | 8 ("Optimal")  | distance | 0.514705 | 0.692171  | 0.557142 | 0.515811 | 0.580821  | 0               | 0.015625      |
-| True    | 5   | uniform  | 0.514705 | 0.664919  | 0.553968 | 0.500998 | 0.538906  | 0.015625        | 0.046875      |
-| True    | 10  | uniform  | 0.455882 | 0.574743  | 0.482857 | 0.450313 | 0.553922  | 0               | 0.03125       |
+| True    | 5              | uniform  | 0.514705 | 0.664919  | 0.553968 | 0.500998 | 0.538906  | 0.015625        | 0.046875      |
+| True    | 10             | uniform  | 0.455882 | 0.574743  | 0.482857 | 0.450313 | 0.553922  | 0               | 0.03125       |
 
 #### KNN Features with importance <0.015 dropped
-| scaling | k   | weights  | accuracy | precision | recall   | f1_score | avg_cross | runtime_holdout | runtime_cross |
-| ------- | --- | -------- | -------- | --------- | ------   | -------- | --------- | --------------- | ------------- |
+| scaling | k              | weights  | accuracy | precision | recall   | f1_score | avg_cross | runtime_holdout | runtime_cross |
+| ------- | ---            | -------- | -------- | --------- | ------   | -------- | --------- | --------------- | ------------- |
 | True    | 6 ("Optimal")  | uniform  | 0.529411 | 0.692208  | 0.573650 | 0.534284 | 0.535921  | 0.015625        | 0.03125       |
 | True    | 8 ("Optimal")  | distance | 0.514705 | 0.692171  | 0.557142 | 0.515811 | 0.580821  | 0               | 0.015625      |
-| True    | 5   | uniform  | 0.514705 | 0.664919  | 0.553968 | 0.500998 | 0.538906  | 0.015625        | 0.046875      |
-| True    | 10  | uniform  | 0.455882 | 0.574743  | 0.482857 | 0.450313 | 0.553922  | 0               | 0.03125       |
+| True    | 5              | uniform  | 0.514705 | 0.664919  | 0.553968 | 0.500998 | 0.538906  | 0.015625        | 0.046875      |
+| True    | 10             | uniform  | 0.455882 | 0.574743  | 0.482857 | 0.450313 | 0.553922  | 0               | 0.03125       |
 
 #### KNN Features with importance <0.02 dropped
-| scaling | k   | weights  | accuracy | precision | recall   | f1_score | avg_cross | runtime_holdout | runtime_cross |
-| ------- | --- | -------- | -------- | --------- | ------   | -------- | --------- | --------------- | ------------- |
+| scaling | k              | weights  | accuracy | precision | recall   | f1_score | avg_cross | runtime_holdout | runtime_cross |
+| ------- | ---            | -------- | -------- | --------- | ------   | -------- | --------- | --------------- | ------------- |
 | True    | 10 ("Optimal") | uniform  | 0.544117 | 0.649523  | 0.580317 | 0.534133 | 0.562911  | 0               | 0.015625      |
 | True    | 5 ("Optimal")  | distance | 0.514705 | 0.591013  | 0.559047 | 0.500525 | 0.562888  | 0               | 0.015625      |
-| True    | 5   | uniform  | 0.470588 | 0.544708  | 0.516825 | 0.464882 | 0.526944  | 0               | 0.03125       |
-| True    | 10  | uniform  | 0.544117 | 0.649523  | 0.580317 | 0.534133 | 0.562911  | 0.015625        | 0.046875      |
+| True    | 5              | uniform  | 0.470588 | 0.544708  | 0.516825 | 0.464882 | 0.526944  | 0               | 0.03125       |
+| True    | 10             | uniform  | 0.544117 | 0.649523  | 0.580317 | 0.534133 | 0.562911  | 0.015625        | 0.046875      |
 
+In contrast to some of our other tests, the best performing setting for this dataset, was using the unscaled dataset with all the features still in it. The reason for this is probably the fact, that the most important attributes are also numbers and most of the time at a value of roughly 2-5, so above 1. We assume this cause a bias towards thos attributes, which in this case was actually positive. In general the average accuracy still improved with fewer unimportant attributes. Also the distance setting was slightly worse for each dataset. Regarding the difference between holdout and cross validation, for every dataset but the unscaled one, the cross validation performed noticeable better and this especially on k values that were not the optimal for the holdout method.
+
+Also since the dataset is so small it seems that the runtime was so fast, that it couldnt be properly calculated.
 
 ### Neural Network
 #### Neural Network All features
+For the combination of the Eucalyptus dataset and the Neural Network classification, we also followed our way of doing from the previous Loan data set. Therefore we only used 3 datasets, but this time using the <0.02 importance one over the <0.015 because there was no difference to the <0.01 dataset, and the following combinations of settings. For the hidden layers we tested a (5,3) and (20, 10, 5) structure, for the activation we alternated between `relu`, `identity`, `logistic` and `tanh`, and for the solver we tested `adam`, `lbfgs` and `sgd`.
+
 | scaling   | hidden_layers   | activation   | solver   |   accuracy |   precision |   recall |   f1_score |   avg_cross |   runtime_holdout |   runtime_cross |
 |:----------|:----------------|:-------------|:---------|-----------:|------------:|---------:|-----------:|------------:|------------------:|----------------:|
 | True      | (5, 3)          | relu         | adam     |   0.25     |   0.196925  | 0.207619 |  0.182553  |    0.312816 |          0.140625 |        0.59375  |
@@ -956,36 +995,41 @@ The Eucalyptus data set has a total of 736 entries of different eucalyptus seedl
 | True      | (20, 10, 5)     | tanh         | lbfgs    |   0.514706 |   0.552436  | 0.528254 |  0.503885  |    0.534418 |          0.0625   |        0.40625  |
 | True      | (20, 10, 5)     | tanh         | sgd      |   0.308824 |   0.126988  | 0.4      |  0.149089  |    0.455067 |          0.125    |        0.625    |
 
-#### Neural Network Features with importance <0.015 dropped
+#### Neural Network Features with importance <0.02 dropped
 | scaling   | hidden_layers   | activation   | solver   |   accuracy |   precision |   recall |   f1_score |   avg_cross |   runtime_holdout |   runtime_cross |
 |:----------|:----------------|:-------------|:---------|-----------:|------------:|---------:|-----------:|------------:|------------------:|----------------:|
-| True      | (5, 3)          | relu         | adam     |   0.323529 |   0.206667  | 0.406667 |  0.209482  |    0.493985 |          0.109375 |        0.484375 |
-| True      | (5, 3)          | relu         | lbfgs    |   0.544118 |   0.660519  | 0.575238 |  0.514124  |    0.592829 |          0.046875 |        0.21875  |
-| True      | (5, 3)          | relu         | sgd      |   0.308824 |   0.395415  | 0.313333 |  0.240009  |    0.34123  |          0.09375  |        0.421875 |
-| True      | (5, 3)          | identity     | adam     |   0.367647 |   0.367118  | 0.445397 |  0.315617  |    0.482067 |          0.09375  |        0.4375   |
-| True      | (5, 3)          | identity     | lbfgs    |   0.5      |   0.570238  | 0.559365 |  0.48262   |    0.616755 |          0.03125  |        0.1875   |
-| True      | (5, 3)          | identity     | sgd      |   0.352941 |   0.350588  | 0.433333 |  0.287665  |    0.486545 |          0.078125 |        0.390625 |
-| True      | (5, 3)          | logistic     | adam     |   0.220588 |   0.0441176 | 0.2      |  0.0797307 |    0.320357 |          0.125    |        0.546875 |
-| True      | (5, 3)          | logistic     | lbfgs    |   0.529412 |   0.599048  | 0.581587 |  0.518953  |    0.621288 |          0.0625   |        0.296875 |
-| True      | (5, 3)          | logistic     | sgd      |   0.220588 |   0.0441176 | 0.2      |  0.0797307 |    0.320357 |          0.09375  |        0.515625 |
-| True      | (5, 3)          | tanh         | adam     |   0.352941 |   0.213889  | 0.428889 |  0.240799  |    0.511929 |          0.09375  |        0.484375 |
-| True      | (5, 3)          | tanh         | lbfgs    |   0.485294 |   0.520346  | 0.54     |  0.465611  |    0.565919 |          0.046875 |        0.234375 |
-| True      | (5, 3)          | tanh         | sgd      |   0.352941 |   0.336795  | 0.41873  |  0.276684  |    0.434171 |          0.09375  |        0.4375   |
-| True      | (20, 10, 5)     | relu         | adam     |   0.514706 |   0.58803   | 0.577143 |  0.498761  |    0.583851 |          0.125    |        0.65625  |
-| True      | (20, 10, 5)     | relu         | lbfgs    |   0.544118 |   0.628148  | 0.58127  |  0.546094  |    0.561385 |          0.078125 |        0.359375 |
-| True      | (20, 10, 5)     | relu         | sgd      |   0.308824 |   0.153571  | 0.4      |  0.15203   |    0.42966  |          0.125    |        0.59375  |
-| True      | (20, 10, 5)     | identity     | adam     |   0.485294 |   0.560862  | 0.548254 |  0.467522  |    0.592728 |          0.109375 |        0.5625   |
-| True      | (20, 10, 5)     | identity     | lbfgs    |   0.529412 |   0.610162  | 0.58381  |  0.517058  |    0.613747 |          0.03125  |        0.265625 |
-| True      | (20, 10, 5)     | identity     | sgd      |   0.455882 |   0.580995  | 0.529524 |  0.403395  |    0.564246 |          0.09375  |        0.5      |
-| True      | (20, 10, 5)     | logistic     | adam     |   0.294118 |   0.151724  | 0.366667 |  0.1458    |    0.362283 |          0.234375 |        0.984375 |
-| True      | (20, 10, 5)     | logistic     | lbfgs    |   0.470588 |   0.530556  | 0.52254  |  0.457775  |    0.555347 |          0.140625 |        0.65625  |
-| True      | (20, 10, 5)     | logistic     | sgd      |   0.220588 |   0.0441176 | 0.2      |  0.0797307 |    0.320357 |          0.1875   |        0.921875 |
-| True      | (20, 10, 5)     | tanh         | adam     |   0.441176 |   0.403631  | 0.497778 |  0.358126  |    0.568904 |          0.140625 |        0.65625  |
-| True      | (20, 10, 5)     | tanh         | lbfgs    |   0.514706 |   0.552436  | 0.528254 |  0.503885  |    0.534418 |          0.0625   |        0.359375 |
-| True      | (20, 10, 5)     | tanh         | sgd      |   0.308824 |   0.126988  | 0.4      |  0.149089  |    0.455067 |          0.109375 |        0.578125 |
+| True      | (5, 3)          | relu         | adam     |   0.352941 |   0.519091  | 0.439683 |  0.269687  |    0.502951 |          0.15625  |        0.734375 |
+| True      | (5, 3)          | relu         | lbfgs    |   0.514706 |   0.634074  | 0.573016 |  0.486459  |    0.612277 |          0.078125 |        0.328125 |
+| True      | (5, 3)          | relu         | sgd      |   0.220588 |   0.0441176 | 0.2      |  0.0797307 |    0.341286 |          0.140625 |        0.65625  |
+| True      | (5, 3)          | identity     | adam     |   0.426471 |   0.405556  | 0.508571 |  0.335545  |    0.55087  |          0.140625 |        0.703125 |
+| True      | (5, 3)          | identity     | lbfgs    |   0.544118 |   0.647863  | 0.599365 |  0.531379  |    0.619762 |          0.046875 |        0.296875 |
+| True      | (5, 3)          | identity     | sgd      |   0.411765 |   0.360952  | 0.49619  |  0.334992  |    0.543351 |          0.140625 |        0.65625  |
+| True      | (5, 3)          | logistic     | adam     |   0.220588 |   0.0441176 | 0.2      |  0.0797307 |    0.320357 |          0.171875 |        0.859375 |
+| True      | (5, 3)          | logistic     | lbfgs    |   0.544118 |   0.62604   | 0.578413 |  0.518759  |    0.607766 |          0.09375  |        0.390625 |
+| True      | (5, 3)          | logistic     | sgd      |   0.220588 |   0.0441176 | 0.2      |  0.0797307 |    0.320357 |          0.15625  |        0.765625 |
+| True      | (5, 3)          | tanh         | adam     |   0.367647 |   0.244269  | 0.453333 |  0.246564  |    0.48053  |          0.140625 |        0.71875  |
+| True      | (5, 3)          | tanh         | lbfgs    |   0.485294 |   0.578974  | 0.551429 |  0.453971  |    0.609213 |          0.078125 |        0.34375  |
+| True      | (5, 3)          | tanh         | sgd      |   0.338235 |   0.232836  | 0.386667 |  0.222313  |    0.435619 |          0.140625 |        0.671875 |
+| True      | (20, 10, 5)     | relu         | adam     |   0.338235 |   0.271474  | 0.427619 |  0.208155  |    0.508989 |          0.1875   |        0.96875  |
+| True      | (20, 10, 5)     | relu         | lbfgs    |   0.485294 |   0.547643  | 0.528254 |  0.474635  |    0.591202 |          0.109375 |        0.515625 |
+| True      | (20, 10, 5)     | relu         | sgd      |   0.235294 |   0.146154  | 0.213333 |  0.108672  |    0.320368 |          0.15625  |        0.921875 |
+| True      | (20, 10, 5)     | identity     | adam     |   0.529412 |   0.630043  | 0.585079 |  0.500634  |    0.613769 |          0.171875 |        0.921875 |
+| True      | (20, 10, 5)     | identity     | lbfgs    |   0.558824 |   0.66127   | 0.610476 |  0.546507  |    0.619773 |          0.0625   |        0.390625 |
+| True      | (20, 10, 5)     | identity     | sgd      |   0.411765 |   0.48619   | 0.490794 |  0.368579  |    0.570318 |          0.140625 |        0.828125 |
+| True      | (20, 10, 5)     | logistic     | adam     |   0.220588 |   0.0441176 | 0.2      |  0.0797307 |    0.320357 |          0.296875 |        1.375    |
+| True      | (20, 10, 5)     | logistic     | lbfgs    |   0.514706 |   0.61033   | 0.574921 |  0.502147  |    0.562832 |          0.171875 |        0.875    |
+| True      | (20, 10, 5)     | logistic     | sgd      |   0.220588 |   0.0441176 | 0.2      |  0.0797307 |    0.320357 |          0.265625 |        1.32812  |
+| True      | (20, 10, 5)     | tanh         | adam     |   0.441176 |   0.568137  | 0.513016 |  0.393837  |    0.579385 |          0.203125 |        0.984375 |
+| True      | (20, 10, 5)     | tanh         | lbfgs    |   0.411765 |   0.481368  | 0.466032 |  0.403036  |    0.5539   |          0.109375 |        0.5      |
+| True      | (20, 10, 5)     | tanh         | sgd      |   0.411765 |   0.292506  | 0.493333 |  0.297053  |    0.491078 |          0.234375 |        0.984375 |
+
+Looking at the many different settings, for the solvers `lbfgs`consistently produced the better results, while `sgd` had the worst. As for the activation, on average the `identity`activation had the best results, even though the best one was using `tanh`. And regarding the hidden layers. The results seem to vary a lot, some settings experience an improvement when switching from (5, 3) to (20, 10, 5), while others decrease in quality.
+
+In comparison to the KNN classification, the Neural Network at its best performed slightly better, but on average worse if taking the lower accuracy settings into account. Similar to the Loan dataset, the runtime is significantly worse, but on a dataset of this size, the difference is not too detremental. An interesting difference to the results of the Loan dataset is the fact, that the same solver, so `lbfgs` produced the best solution but with a different activator, `tanh`, and using the second hidden layer structure, which is (20, 10, 5). Another noteworthy aspect, is that the influence of the different settings seemed to have a larger impact on the results as with the Loan dataset.
 
 
 ### Random Forest
+For the combination of the Eucalyptus dataset and the Random Forest classification, we again used almost the same setup as for the Loan dataset. As with the Neural Network, we did not use the <0.015 importance dataset, as its results and the ones from the <0.01 were the same. So this time we used 4 different versions of the dataset and a combination of the following settings. For the leaves we used a combination of 5, 100 and 5000 nodes, for the max depth we used the values 5, 20 and 1000, and for the maximum features we used 5 and 20.
 
 #### Random Forest All features
 | scaling   |   leaf_nodes |   max_depth |   max_features |   Accuracy |   Precision |   Recall |       F1 |   avg_cross |   runtime_holdout |   runtime_cross |
@@ -1049,28 +1093,6 @@ The Eucalyptus data set has a total of 736 entries of different eucalyptus seedl
 | True      |         5000 |        1000 |              5 |   0.529412 |    0.671688 | 0.572698 | 0.518075 |    0.640725 |          0.203125 |        0.828125 |
 | True      |         5000 |        1000 |             20 |   0.544118 |    0.695222 | 0.581587 | 0.541834 |    0.637673 |          0.25     |        1.1875   |
 
-#### Random Forest Features with importance <0.015 dropped
-| scaling   |   leaf_nodes |   max_depth |   max_features |   Accuracy |   Precision |   Recall |       F1 |   avg_cross |   runtime_holdout |   runtime_cross |
-|:----------|-------------:|------------:|---------------:|-----------:|------------:|---------:|---------:|------------:|------------------:|----------------:|
-| True      |            5 |           5 |              5 |   0.367647 |    0.337424 | 0.431111 | 0.288175 |    0.556918 |          0.125    |        0.609375 |
-| True      |            5 |           5 |             20 |   0.455882 |    0.416465 | 0.482222 | 0.394911 |    0.540433 |          0.140625 |        0.6875   |
-| True      |            5 |          20 |              5 |   0.367647 |    0.337424 | 0.431111 | 0.288175 |    0.556918 |          0.109375 |        0.546875 |
-| True      |            5 |          20 |             20 |   0.455882 |    0.416465 | 0.482222 | 0.394911 |    0.540433 |          0.140625 |        0.65625  |
-| True      |            5 |        1000 |              5 |   0.367647 |    0.337424 | 0.431111 | 0.288175 |    0.556918 |          0.109375 |        0.546875 |
-| True      |            5 |        1000 |             20 |   0.455882 |    0.416465 | 0.482222 | 0.394911 |    0.540433 |          0.125    |        0.65625  |
-| True      |          100 |           5 |              5 |   0.455882 |    0.657938 | 0.504127 | 0.438893 |    0.619717 |          0.109375 |        0.609375 |
-| True      |          100 |           5 |             20 |   0.5      |    0.679643 | 0.539683 | 0.477317 |    0.610762 |          0.15625  |        0.78125  |
-| True      |          100 |          20 |              5 |   0.5      |    0.658413 | 0.545079 | 0.482406 |    0.634766 |          0.171875 |        0.78125  |
-| True      |          100 |          20 |             20 |   0.544118 |    0.701517 | 0.57619  | 0.536372 |    0.636214 |          0.21875  |        1.09375  |
-| True      |          100 |        1000 |              5 |   0.5      |    0.658413 | 0.545079 | 0.482406 |    0.634766 |          0.140625 |        0.765625 |
-| True      |          100 |        1000 |             20 |   0.544118 |    0.701517 | 0.57619  | 0.536372 |    0.636214 |          0.234375 |        1.09375  |
-| True      |         5000 |           5 |              5 |   0.455882 |    0.657938 | 0.504127 | 0.438893 |    0.619717 |          0.140625 |        0.640625 |
-| True      |         5000 |           5 |             20 |   0.5      |    0.679643 | 0.539683 | 0.477317 |    0.610762 |          0.171875 |        0.84375  |
-| True      |         5000 |          20 |              5 |   0.529412 |    0.671688 | 0.572698 | 0.518075 |    0.640725 |          0.171875 |        0.859375 |
-| True      |         5000 |          20 |             20 |   0.544118 |    0.695222 | 0.581587 | 0.541834 |    0.637673 |          0.25     |        1.1875   |
-| True      |         5000 |        1000 |              5 |   0.529412 |    0.671688 | 0.572698 | 0.518075 |    0.640725 |          0.203125 |        0.84375  |
-| True      |         5000 |        1000 |             20 |   0.544118 |    0.695222 | 0.581587 | 0.541834 |    0.637673 |          0.265625 |        1.15625  |
-
 ### Random Forest Features with importance <0.02 dropped
 | scaling   |   leaf_nodes |   max_depth |   max_features |   Accuracy |   Precision |   Recall |       F1 |   avg_cross |   runtime_holdout |   runtime_cross |
 |:----------|-------------:|------------:|---------------:|-----------:|------------:|---------:|---------:|------------:|------------------:|----------------:|
@@ -1093,3 +1115,24 @@ The Eucalyptus data set has a total of 736 entries of different eucalyptus seedl
 | True      |         5000 |        1000 |              5 |   0.544118 |    0.679328 | 0.584762 | 0.540338 |    0.630176 |          0.203125 |        0.890625 |
 | True      |         5000 |        1000 |             20 |   0.573529 |    0.717419 | 0.606032 | 0.571863 |    0.639154 |          0.25     |        1.125    |
 
+
+Similarly to the Loan dataset, several settings share the same result, since the combination of the importance threshhold and the `max features` setting probably produced equal models. Something that also happened with the Obesity dataset, is, that because of the dataset size, the `max depth` setting barerly made a difference in our results. The amount of leaf nodes also had almost no impact from a certain point onwards, which lies between 5 and 100. But within that range, the more leaves used, the better the solution. It only mattered, when we used the unscaled set, which also led to the best holdout solution for this dataset. The best cross validation result was achieved with the <0.02 dataset with 100 leaves, a max depth of 20 and 20 max features. Regarding the runtimes, for this dataset they are also very compareable to the Neural Network. 
+## Conclusions
+
+### Best results by model:
+
+| Model           | scaling | settings                 | accuracy | precision | recall   | f1_score | avg_cross | runtime_holdout | runtime_cross |
+|:----------|-------------:|------------:|---------------:|-----------:|------------:|---------:|---------:|------------:|------------------:|
+| KNN             | False   | k = 1 ("Optimal"), weights = uniform | 0.588235 | 0.646956  | 0.625396 | 0.589751 | 0.528470  | 0.046875        | 0.109375      |
+| Neural networks | True    | hidden_layers = (20, 10, 5), activation = tanh, solver = lbfgs |   0.588235 |   0.606215  | 0.612381 |  0.587134  |    0.558478 |          0.21875  |        0.625    |
+| Random forest   | True    | leaf_nodes = 5000, max_depth = 1000, max_features = 5 |   0.602941 |    0.690065 | 0.632381 | 0.609858 |    0.565862 |          0.140625 |        0.734375 |
+
+### Worst results by model:
+
+| Model           | scaling | settings                 | accuracy | precision | recall   | f1_score | avg_cross | runtime_holdout | runtime_cross |
+|:----------|-------------:|------------:|---------------:|-----------:|------------:|---------:|---------:|------------:|------------------:|
+| KNN       | True   | k = 5, weights = uniform | 0.338235 | 0.345604  | 0.305714 | 0.339905 | 0.393592  | 0               | 0.125         |
+| Neural networks | True | hidden_layers = (20, 10, 5), activation = relu, solver = sgd |   0.205882 |   0.0424242 | 0.186667 |  0.0762527 |    0.326316 |          0.3125   |        1.29688  |
+| Random forest   | True | leaf_nodes = 5, max_depth = 5/20/1000, max_features = 5 |   0.279412 |    0.446875 | 0.313333 | 0.170165 |    0.43857  |          0.09375  |        0.5      |
+
+Overall the results on this dataset are a lot lower than for the other ones. The reason for this is most likely the size of the dataset and low amount of relevant attributes. In general, the best and worst solutions share alot of similarities with the Loan dataset, except for the best KNN result, which seems to have a very unique best result. Despite that the Random Forest classification produced the best result also for this dataset. Also, even though it took a lot longer in terms of runtime, the cross validation did produce the better results for every classification.
