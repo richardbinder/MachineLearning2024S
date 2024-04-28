@@ -292,6 +292,270 @@ For the Random Forest classifier model, we made some tests with different hyperp
 
 ## Conclusions
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Dataset #2 - Loan
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Dataset #3 - Estimation of Obesity Levels 
+
+The Obesity data set, contains data from a survey from Mexico, Peru and Colombia in order 
+to determine the obesity level of the participants based on their eating habits, 
+physical activities, etc. The data set contains `16 non-target attributes` and `1 class attribute`. 
+The attributes are of type nominal, ordinal and ratio. None of the instances have missing values.
+For us this dataset is interesting to use in a "classification" context, since we can predict 
+the obesity level of a person based on their eating habits, physical activities, etc.
+
+- Instances:
+    - Total: 2111 instances
+    - Training: 75% of the dataset
+    - Test: 25% of the dataset
+- Attributes:
+    - class:
+        - `Description`: Obesity level
+        - `Type`: ordinal
+    - Attributes 2-16:
+        - `Description`: 16 attributes describing several characteristics and health aspects 
+            of each surveyed person, e.g. weight, age, height, age, smoking habits, drinking habits, etc.
+        - `Types`: nominal, ordinal, ratio
+
+### Preprocessing
+The following preprocessing steps will be performed.
+
+- We transform ordinal attributes by ordinal encoding, i.e. each category is a number 
+such that the original ordering is preserved. Some nominal attributes were already encoded like
+this in the dataset, others had to be encoded manually. This applies to the following attributes.
+- We use simple label encoding for each remaining nominal attribute (all of them are binary).
+- The ratio attributes are left as is for now. 
+
+We then define several preprocessing variations:
+- `simple`: Preprocessing as defined above.
+- `scaled`: Preprocessing applies min-max scaling to every attribute in the dataset such that 
+0 is the minimum and 1 is the maximum.
+- `1p`: Only the most important attributes in the dataset are selected for training,
+leaving out any attribute with less than 1% importance score.
+The score is based on a RandomForestClassifier.
+- `1p_scaled`: Same as 1p, but the attributes are also scaled.
+- `5p`: Same as 1p, but leaving out any attribute with less than 5% importance.
+- `5p_scaled`: Same as 5p. but the attributes are also scaled.
+
+
+### KNN (K Nearest Neighbours Classifier)
+
+#### Exploring Classification Configurations
+
+We explore KNN parameters (k, leaf size, weight) on the `scaled` dataset. 
+Only the choice of k seems to have any impact on the results.
+The best k appears to be 1, although 5 ist not far off.
+Trivially, too high values of k have a negative impact on all metrics 
+due to "blurring" the classes together.  
+
+|   k |   leaf_size | weight   |   Accuracy |   Precision |   Recall |       F1 |
+|----:|------------:|:---------|-----------:|------------:|---------:|---------:|
+|   1 |           1 | uniform  |   0.780303 |    0.769977 | 0.777837 | 0.774867 |
+|   1 |           5 | uniform  |   0.780303 |    0.769977 | 0.777837 | 0.774867 |
+|   1 |          20 | uniform  |   0.780303 |    0.769977 | 0.777837 | 0.774867 |
+|   1 |           1 | distance |   0.780303 |    0.769977 | 0.777837 | 0.774867 |
+|   1 |           5 | distance |   0.780303 |    0.769977 | 0.777837 | 0.774867 |
+|   1 |          20 | distance |   0.780303 |    0.769977 | 0.777837 | 0.774867 |
+|   5 |           1 | uniform  |   0.75947  |    0.748841 | 0.757308 | 0.751506 |
+|   5 |           5 | uniform  |   0.75947  |    0.748841 | 0.757308 | 0.751506 |
+|   5 |          20 | uniform  |   0.75947  |    0.748841 | 0.757308 | 0.751506 |
+|   5 |           1 | distance |   0.770833 |    0.760931 | 0.768478 | 0.760012 |
+|   5 |           5 | distance |   0.770833 |    0.760931 | 0.768478 | 0.760012 |
+|   5 |          20 | distance |   0.770833 |    0.760931 | 0.768478 | 0.760012 |
+|  20 |           1 | uniform  |   0.683712 |    0.66395  | 0.681697 | 0.662868 |
+|  20 |           5 | uniform  |   0.683712 |    0.66395  | 0.681697 | 0.662868 |
+|  20 |          20 | uniform  |   0.683712 |    0.66395  | 0.681697 | 0.662868 |
+|  20 |           1 | distance |   0.714015 |    0.701612 | 0.712415 | 0.695915 |
+|  20 |           5 | distance |   0.714015 |    0.701612 | 0.712415 | 0.695915 |
+|  20 |          20 | distance |   0.714015 |    0.701612 | 0.712415 | 0.695915 |
+| 100 |           1 | uniform  |   0.549242 |    0.559037 | 0.546023 | 0.496239 |
+| 100 |           5 | uniform  |   0.549242 |    0.559037 | 0.546023 | 0.496239 |
+| 100 |          20 | uniform  |   0.549242 |    0.559037 | 0.546023 | 0.496239 |
+| 100 |           1 | distance |   0.609848 |    0.627705 | 0.610395 | 0.565435 |
+| 100 |           5 | distance |   0.609848 |    0.627705 | 0.610395 | 0.565435 |
+| 100 |          20 | distance |   0.609848 |    0.627705 | 0.610395 | 0.565435 |
+
+#### Exploring Preprocessing Variations
+
+Using the best found parameters from above (k=1, leaf_size=5, weight=distance),
+we evaluate performance on all preprocessing variations.
+Scaling has a negative impact on performance here.
+This is a hint at the fact that simple min-max scaling does not make sense for all
+attributes.
+Some attribute values become too close to each other, making it harder for the KNN model
+to separate the classes.
+Leaving out attributes with less than 1% importance reduces complexity and has a positive impact.
+This is not surprising as KNN tends to perform better with more simple data.
+Leaving out attributes with less than 5% importance on the other hand leaves 
+out too much information and thus has a negative impact.
+
+| name      |   accuracy |   precision |   recall |   f1_score |
+|:----------|-----------:|------------:|---------:|-----------:|
+| simple    |   0.88447  |    0.880534 | 0.886004 |   0.876739 |
+| scaled    |   0.780303 |    0.769977 | 0.777837 |   0.774867 |
+| 1p        |   0.890152 |    0.88684  | 0.892136 |   0.884247 |
+| 1p_scaled |   0.820076 |    0.813363 | 0.817979 |   0.816772 |
+| 5p        |   0.863636 |    0.861078 | 0.863407 |   0.858544 |
+| 5p_scaled |   0.856061 |    0.850314 | 0.854285 |   0.854301 |
+
+### Neural Network
+
+We explore Neural Network parameters (hidden layers, activation function, solving optimization algorithm) 
+on the `scaled` dataset. 
+Interestingly, the choice of hidden layers and optimization algorithm doesn't seem to matter at 
+all as long as the activation function is the identity function 
+(which ofc makes the Neural Network a simple linear function).
+The problem may predominantly involve linear relationships 
+(e.g. higher weight -> proportionally higher chance for obesity).
+In such cases, introducing non-linearity (through tanh or ReLU) could decrease performance.
+This hypothesis can easily be tested with our Random Forest Classifier,
+as it is very good at decoding linearly dependent variables.
+On another note, ADAM is the most consistent algorithm in all tests, most likely due to
+imbalanced classes, e.g. normal weight is much more likely than Obesity Type III. 
+ADAM assigns higher learning rate to underrepresented classes.
+
+#### Exploring Classification Configurations
+
+| hidden_layers   | activation   | solver   |   Accuracy |   Precision |   Recall |        F1 |
+|:----------------|:-------------|:---------|-----------:|------------:|---------:|----------:|
+| (5, 3)          | relu         | adam     |   0.967803 |   0.967364  | 0.965452 | 0.967641  |
+| (5, 3)          | relu         | lbfgs    |   0.17803  |   0.0254329 | 0.142857 | 0.0538098 |
+| (5, 3)          | relu         | sgd      |   0.636364 |   0.638873  | 0.633966 | 0.598734  |
+| (5, 3)          | identity     | adam     |   0.971591 |   0.970786  | 0.970211 | 0.971557  |
+| (5, 3)          | identity     | lbfgs    |   0.960227 |   0.958614  | 0.960267 | 0.960043  |
+| (5, 3)          | identity     | sgd      |   0.960227 |   0.960132  | 0.959208 | 0.959994  |
+| (5, 3)          | logistic     | adam     |   0.903409 |   0.920436  | 0.903379 | 0.897618  |
+| (5, 3)          | logistic     | lbfgs    |   0.954545 |   0.954381  | 0.955411 | 0.954095  |
+| (5, 3)          | logistic     | sgd      |   0.185606 |   0.0525127 | 0.151927 | 0.0670128 |
+| (5, 3)          | tanh         | adam     |   0.9375   |   0.935945  | 0.938868 | 0.937046  |
+| (5, 3)          | tanh         | lbfgs    |   0.950758 |   0.9508    | 0.951346 | 0.950301  |
+| (5, 3)          | tanh         | sgd      |   0.787879 |   0.794701  | 0.791967 | 0.780513  |
+| (20, 10, 5)     | relu         | adam     |   0.844697 |   0.882456  | 0.864548 | 0.83549   |
+| (20, 10, 5)     | relu         | lbfgs    |   0.844697 |   0.884402  | 0.865057 | 0.833491  |
+| (20, 10, 5)     | relu         | sgd      |   0.149621 |   0.0213745 | 0.142857 | 0.0389459 |
+| (20, 10, 5)     | identity     | adam     |   0.975379 |   0.974107  | 0.974472 | 0.975323  |
+| (20, 10, 5)     | identity     | lbfgs    |   0.969697 |   0.967337  | 0.969088 | 0.96948   |
+| (20, 10, 5)     | identity     | sgd      |   0.967803 |   0.967     | 0.966913 | 0.967699  |
+| (20, 10, 5)     | logistic     | adam     |   0.943182 |   0.943696  | 0.9473   | 0.942971  |
+| (20, 10, 5)     | logistic     | lbfgs    |   0.939394 |   0.939337  | 0.937069 | 0.939342  |
+| (20, 10, 5)     | logistic     | sgd      |   0.149621 |   0.0213745 | 0.142857 | 0.0389459 |
+| (20, 10, 5)     | tanh         | adam     |   0.952652 |   0.951411  | 0.952305 | 0.952316  |
+| (20, 10, 5)     | tanh         | lbfgs    |   0.954545 |   0.952961  | 0.95293  | 0.954297  |
+| (20, 10, 5)     | tanh         | sgd      |   0.893939 |   0.89433   | 0.894488 | 0.89179   |
+
+#### Exploring Preprocessing Variations
+
+Using the best found parameters from above (hidden layers=(5,3), activation=identity, 
+solver=adam), we evaluate performance on all preprocessing variations.
+Contrary to KNN, scaling has a very positive impact on performance in our Neural Network.
+This makes sense, because attributes in an NN are summed up, and therefore need to be 
+of similar magnitude to be weighted equally by the model. 
+
+| name      |   accuracy |   precision |   recall |   f1_score |
+|:----------|-----------:|------------:|---------:|-----------:|
+| simple    |   0.850379 |    0.844154 | 0.845462 |   0.848653 |
+| scaled    |   0.971591 |    0.970786 | 0.970211 |   0.971557 |
+| 1p        |   0.850379 |    0.845158 | 0.841707 |   0.849065 |
+| 1p_scaled |   0.964015 |    0.963361 | 0.962814 |   0.963803 |
+| 5p        |   0.672348 |    0.660342 | 0.66907  |   0.664908 |
+| 5p_scaled |   0.700758 |    0.694385 | 0.697014 |   0.698605 |
+
+
+### Random Forest
+
+#### Exploring Classification Configurations
+
+We explore Random Forest parameters (leaf nodes, maximum depth, maximum features) 
+on the `scaled` dataset. 
+Finding the best parameters here is a simple matter of brute forcing.
+Choosing too few leaf nodes or too little depth underfits the dataset.
+Too many features (splits per node) overfits the dataset.
+The fact that the performance of the Random Forest is very similar to the Neural Network
+is another hint that the variables are mostly linearly dependent on each other.
+
+|   leaf_nodes |   max_depth |   max_features |   Accuracy |   Precision |   Recall |       F1 |
+|-------------:|------------:|---------------:|-----------:|------------:|---------:|---------:|
+|            5 |           5 |              5 |   0.695076 |    0.677258 | 0.697882 | 0.67563  |
+|            5 |           5 |             20 |   0.600379 |    0.540717 | 0.62991  | 0.512041 |
+|            5 |          20 |              5 |   0.695076 |    0.677258 | 0.697882 | 0.67563  |
+|            5 |          20 |             20 |   0.600379 |    0.540717 | 0.62991  | 0.512041 |
+|            5 |        1000 |              5 |   0.695076 |    0.677258 | 0.697882 | 0.67563  |
+|            5 |        1000 |             20 |   0.600379 |    0.540717 | 0.62991  | 0.512041 |
+|          100 |           5 |              5 |   0.850379 |    0.84495  | 0.849312 | 0.849458 |
+|          100 |           5 |             20 |   0.831439 |    0.838974 | 0.828217 | 0.831849 |
+|          100 |          20 |              5 |   0.935606 |    0.936145 | 0.934806 | 0.936134 |
+|          100 |          20 |             20 |   0.94697  |    0.947067 | 0.948022 | 0.946945 |
+|          100 |        1000 |              5 |   0.935606 |    0.936145 | 0.934806 | 0.936134 |
+|          100 |        1000 |             20 |   0.94697  |    0.947067 | 0.948022 | 0.946945 |
+|         5000 |           5 |              5 |   0.850379 |    0.84495  | 0.849312 | 0.849458 |
+|         5000 |           5 |             20 |   0.831439 |    0.838974 | 0.828217 | 0.831849 |
+|         5000 |          20 |              5 |   0.945076 |    0.94558  | 0.945526 | 0.945411 |
+|         5000 |          20 |             20 |   0.94697  |    0.947067 | 0.948022 | 0.946945 |
+|         5000 |        1000 |              5 |   0.945076 |    0.94558  | 0.945526 | 0.945411 |
+|         5000 |        1000 |             20 |   0.94697  |    0.947067 | 0.948022 | 0.946945 |
+
+#### Exploring Preprocessing Variations
+
+Using the best found parameters from above (leaf nodes=100, max_depth=20, max_features=5), 
+we evaluate performance on all preprocessing variations.
+Scaling has no impact at all here. 
+This makes sense, as decision trees don't really care about the magnitude of variables.
+If the values are 100 times larger, then the decision tree boundaries are automatically
+scaled by 100 as well.
+Just like with KNN, the simplest data preprocessing that still contains
+enough information (1p) has the best performance.
+
+| name      |   accuracy |   precision |   recall |   f1_score |
+|:----------|-----------:|------------:|---------:|-----------:|
+| simple    |   0.935606 |    0.936145 | 0.934806 |   0.936134 |
+| scaled    |   0.935606 |    0.936145 | 0.934806 |   0.936134 |
+| 1p        |   0.954545 |    0.954663 | 0.954709 |   0.954635 |
+| 1p_scaled |   0.952652 |    0.952832 | 0.952697 |   0.952773 |
+| 5p        |   0.871212 |    0.867758 | 0.870318 |   0.870439 |
+| 5p_scaled |   0.871212 |    0.867758 | 0.870318 |   0.870439 |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Dataset #4 - 
