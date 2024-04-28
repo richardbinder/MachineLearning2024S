@@ -306,6 +306,22 @@ Finally, we can also see that for this dataset is kinda simple/small to get stuc
 
 ## Conclusions
 
+### Best results by model:
+
+| Model           | Case         | Scaling | Accuracy | Precision | Recall | F1  |
+|-----------------|--------------|---------|----------|-----------|--------|-----|
+| KNN             | 9 features   | Yes     | 0.97     | 0.98      | 0.97   |0.972|
+| Neural networks | All features | Yes     | 0.98     | 0.98      | 0.98   |0.986|
+| Random forest   | All features | No      | 0.97     | 0.97      | 0.96   |0.972|
+
+### Worst results by model:
+
+| Model           | Case         | Scaling | Accuracy | Precision | Recall | F1  |
+|-----------------|--------------|---------|----------|-----------|--------|-----|
+| KNN             | 3 features   | No      | 0.88     | 0.90      | 0.87   |0.886|
+| Neural networks | All features | No      | 0.58     | 0.29      | 0.50   |0.429|
+| Random forest   | All features | No      | 0.88     | 0.90      | 0.87   |0.886|
+
 In general, all the models performed well in the classification task, with the best results obtained with the neural network and the worst results obtained with also the neural network. This is expected since the neural network is a more complex model that can capture more complex patterns in the data, but it also needs more data to train properly, and since we are working with a small dataset, is more likely to don't catch the patterns in the data so easily as the other models and therefore perform worse without a complex architecture.
 
 Random forest and KNN performed well in the classification task, in general these models gave good and consistent results with different hyperparameters and preprocessing. 
