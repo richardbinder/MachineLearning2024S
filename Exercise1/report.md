@@ -555,11 +555,11 @@ enough information (1p) has the best performance.
 The Neural Network performed best of the three classification
 models, but also has the highest training computation time.
 Some activation functions (non-linear ones) and optimization algorithms (SGD) 
-also don't seem to do well on the dataset.
+don't to do well on the dataset.
 The Random Tree model was the most robust and easiest to get the right
 choice of parameters on.
-KNN was the simplest and fastest algorithm, but also easily capped at a certain performance,
-and does not allow to change many parameters.
+KNN was the simplest and fastest algorithm, but is also easily capped at a certain performance,
+and changing its parameters doesn't significantly improve the performance.
 Scaling the data improved the performance of the Neural Network, but not the others.
 Below is a summary of the best found preprocessing and parameter choices for each model.
 
