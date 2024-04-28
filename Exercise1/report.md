@@ -308,19 +308,19 @@ Finally, we can also see that for this dataset is kinda simple/small to get stuc
 
 ### Best results by model:
 
-| Model           | Case         | Scaling | Accuracy | Precision | Recall | F1  |
+| Model           | Settings         | Scaling | Accuracy | Precision | Recall | F1  |
 |-----------------|--------------|---------|----------|-----------|--------|-----|
-| KNN             | 9 features   | Yes     | 0.97     | 0.98      | 0.97   |0.972|
-| Neural networks | All features | Yes     | 0.98     | 0.98      | 0.98   |0.986|
-| Random forest   | All features | No      | 0.97     | 0.97      | 0.96   |0.972|
+| KNN             | 9 features, k=19, distance   | Yes     | 0.97     | 0.98      | 0.97   |0.972|
+| Neural networks | All features, (10, 10, 10), relu, adam  | Yes     | 0.98     | 0.98      | 0.98   |0.986|
+| Random forest   | All features, 10 leafs, 10 features, 10 deep | No      | 0.97     | 0.97      | 0.96   |0.972|
 
 ### Worst results by model:
 
-| Model           | Case         | Scaling | Accuracy | Precision | Recall | F1  |
+| Model           | Settings         | Scaling | Accuracy | Precision | Recall | F1  |
 |-----------------|--------------|---------|----------|-----------|--------|-----|
-| KNN             | 3 features   | No      | 0.88     | 0.90      | 0.87   |0.886|
-| Neural networks | All features | No      | 0.58     | 0.29      | 0.50   |0.429|
-| Random forest   | All features | No      | 0.88     | 0.90      | 0.87   |0.886|
+| KNN             | 3 features, k=10, weight=distance             | No      | 0.88     | 0.90      | 0.87   |0.886|
+| Neural networks | All features, (5, 3, 10), act=relu, slv=lbfgs | No      | 0.58     | 0.29      | 0.50   |0.429|
+| Random forest   | All features, 2 leafs, 2 features, 2 deep     | No      | 0.88     | 0.90      | 0.87   |0.886|
 
 In general, all the models performed well in the classification task, with the best results obtained with the neural network and the worst results obtained with also the neural network. This is expected since the neural network is a more complex model that can capture more complex patterns in the data, but it also needs more data to train properly, and since we are working with a small dataset, is more likely to don't catch the patterns in the data so easily as the other models and therefore perform worse without a complex architecture.
 
@@ -611,7 +611,7 @@ In contrast to the other two classifications, the Random Forest is the only one 
 ### Best results by model:
 
 | Model           | scaling | settings                 | accuracy | precision | recall   | f1_score | avg_cross | runtime_holdout | runtime_cross |
-|:----------|-------------:|------------:|---------------:|-----------:|------------:|---------:|---------:|------------:|------------------:|
+|:----------|-------------:|:------------|---------------:|-----------:|------------:|---------:|---------:|------------:|------------------:|
 | KNN             | False   | k = 18 ("Optimal"), weights = distance | 0.861    | 0.819618  | 0.646044 | 0.854941 | 0.873499  | 0.015625        | 0.078125      |
 | Neural networks | True      | hidden_layers = (5, 3), activation = identity, solver = lbfgs |      0.883 |   0.849155  | 0.730724 |   0.879921 |      0.876  |           1.01562 |         6.14062 |
 | Random forest   | False      | leaf_nodes = 5000, max_depth = 1000, max_features = 20 |      0.882 |    0.715351 | 0.621326 | 0.870345 |      0.8686 |          4.53125  |        18.9531  |
@@ -619,7 +619,7 @@ In contrast to the other two classifications, the Random Forest is the only one 
 ### Worst results by model:
 
 | Model           | scaling | settings                 | accuracy | precision | recall   | f1_score | avg_cross | runtime_holdout | runtime_cross |
-|:----------|-------------:|------------:|---------------:|-----------:|------------:|---------:|---------:|------------:|------------------:|
+|:----------|-------------:|:------------|---------------:|-----------:|------------:|---------:|---------:|------------:|------------------:|
 | KNN             | False   | k = 5, weights = uniform | 0.316    | 0.334999  | 0.199847 | 0.295386 | 0.302     | 0.546875        | 1.46875       |
 | Neural networks | True      | hidden_layers = (20, 10, 5), activation = logistic, solver = sgd |      0.304 |   0.0434286 | 0.142857 |   0.141742 |      0.2989 |          2.96875  |        13.8281  |
 | Random forest   | True      | leaf_nodes = 5, max_depth = 5/20/1000, max_features = 5 |      0.55  |    0.295686 | 0.290747 | 0.446309 |      0.5808 |          0.40625  |         2.03125 |
@@ -1122,7 +1122,7 @@ Similarly to the Loan dataset, several settings share the same result, since the
 ### Best results by model:
 
 | Model           | scaling | settings                 | accuracy | precision | recall   | f1_score | avg_cross | runtime_holdout | runtime_cross |
-|:----------|-------------:|------------:|---------------:|-----------:|------------:|---------:|---------:|------------:|------------------:|
+|:----------|-------------:|:------------|---------------:|-----------:|------------:|---------:|---------:|------------:|------------------:|
 | KNN             | False   | k = 1 ("Optimal"), weights = uniform | 0.588235 | 0.646956  | 0.625396 | 0.589751 | 0.528470  | 0.046875        | 0.109375      |
 | Neural networks | True    | hidden_layers = (20, 10, 5), activation = tanh, solver = lbfgs |   0.588235 |   0.606215  | 0.612381 |  0.587134  |    0.558478 |          0.21875  |        0.625    |
 | Random forest   | True    | leaf_nodes = 5000, max_depth = 1000, max_features = 5 |   0.602941 |    0.690065 | 0.632381 | 0.609858 |    0.565862 |          0.140625 |        0.734375 |
@@ -1130,7 +1130,7 @@ Similarly to the Loan dataset, several settings share the same result, since the
 ### Worst results by model:
 
 | Model           | scaling | settings                 | accuracy | precision | recall   | f1_score | avg_cross | runtime_holdout | runtime_cross |
-|:----------|-------------:|------------:|---------------:|-----------:|------------:|---------:|---------:|------------:|------------------:|
+|:----------|-------------:|:------------|---------------:|-----------:|------------:|---------:|---------:|------------:|------------------:|
 | KNN       | True   | k = 5, weights = uniform | 0.338235 | 0.345604  | 0.305714 | 0.339905 | 0.393592  | 0               | 0.125         |
 | Neural networks | True | hidden_layers = (20, 10, 5), activation = relu, solver = sgd |   0.205882 |   0.0424242 | 0.186667 |  0.0762527 |    0.326316 |          0.3125   |        1.29688  |
 | Random forest   | True | leaf_nodes = 5, max_depth = 5/20/1000, max_features = 5 |   0.279412 |    0.446875 | 0.313333 | 0.170165 |    0.43857  |          0.09375  |        0.5      |
