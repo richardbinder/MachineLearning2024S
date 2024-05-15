@@ -6,7 +6,7 @@ from sklearn.metrics.pairwise import (
 )
 
 class KNN:
-    def __init__(self, k=5, distance='euclidean'):
+    def __init__(self, k=5, distance='euclidean', weighted=False):
         """
         When initializing the class, we can specify the number of neighbors to consider (default is 5), 
         and the distance metric to use (default is 'euclidean').
@@ -17,6 +17,10 @@ class KNN:
         
         # Assign the distance metric to use
         self.distance = distance
+        
+        
+        # Assign the weighted parameter, defines if the KNN is weighted or not
+        self.weighted = weighted
         
     
     def fit(self, x, y):
@@ -94,5 +98,21 @@ class KNN:
         # For each neighbor in neighbors, get the target value
         neighbors_targets = [neighbor[1] for neighbor in neighbors]
         
-        # Return the mean of the target values of the k-nearest neighbors
-        return np.mean(neighbors_targets)
+        # ---- This is the part that changes between KNN and Weighted KNN, this is just KNN ----
+        if not self.weighted:
+            return np.mean(neighbors_targets)
+        
+        # ---- This is the part that changes between KNN and Weighted KNN, this is Weighted KNN ----
+        # For each neighbor in neighbors, get the distance value
+        neighbors_distances = [neighbor[0] for neighbor in neighbors]
+    
+        # Invert distances to use them as weights (closer points get higher weights)
+        # Add a small value to the distance (in this case 1e-5) to avoid division by zero
+        weights = [1 / (dist + 1e-5) for dist in neighbors_distances]
+
+        # Calculate the weighted average
+        # np.dot is the dot product the weights and the target values
+        # np.sum is the sum of the weights
+        weighted_average = np.dot(neighbors_targets, weights) / np.sum(weights)
+        
+        return weighted_average
