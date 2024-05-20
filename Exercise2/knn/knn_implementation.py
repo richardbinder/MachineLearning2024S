@@ -18,7 +18,6 @@ class KNN:
         # Assign the distance metric to use
         self.distance = distance
         
-        
         # Assign the weighted parameter, defines if the KNN is weighted or not
         self.weighted = weighted
         
@@ -105,7 +104,7 @@ class KNN:
         # ---- This is the part that changes between KNN and Weighted KNN, this is Weighted KNN ----
         # For each neighbor in neighbors, get the distance value
         neighbors_distances = [neighbor[0] for neighbor in neighbors]
-    
+        
         # Invert distances to use them as weights (closer points get higher weights)
         # Add a small value to the distance (in this case 1e-5) to avoid division by zero
         weights = [1 / (dist + 1e-5) for dist in neighbors_distances]

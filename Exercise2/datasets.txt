@@ -1,0 +1,10 @@
+# instances - medium (9568)
+# Features - low (5)
+https://archive.ics.uci.edu/dataset/294/combined+cycle+power+plant
+
+
+# instances - medium (17389)
+# Features - medium (13)
+https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset
+
+
