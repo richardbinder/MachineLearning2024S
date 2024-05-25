@@ -20,7 +20,8 @@ class LinearRegressionSGD:
 
             # gradient of RSS for each weight w is dw = 2 * x * (y_pred - y)
             # for bias it is db = 2 * (y_pred - y)
-            # normalization by the number of samples
+            # we sum all the gradients from all samples and normalize it by the number of samples
+            # => each epoch updates each weight only one time
             dW = (1 / n_samples) * 2 * np.dot(X.T, residuals)
             db = (1 / n_samples) * 2 * np.sum(residuals)
 
