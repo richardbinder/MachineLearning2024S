@@ -1,7 +1,7 @@
 import numpy as np
 
 
-class LinearRegressionSGD:
+class LinearRegressionGD:
     def __init__(self, learning_rate=0.01, epochs=1000):
         self.learning_rate = learning_rate
         self.iterations = epochs
