@@ -10,60 +10,32 @@ FINISH = 3
 # Define an array of 30 columns and 30 rows
 track = np.full((30, 30), WALL)
 
-# Define the circle-like track
-for i in range(6, 24):
-    track[i, 3:9] = TRACK
-    track[i, 21:27] = TRACK
+track[20:28, 3:9] = TRACK
+track[18:20, 4] = TRACK
+track[17:20, 5] = TRACK
+track[16:20, 6] = TRACK
+track[15:20, 7:9] = TRACK
+track[15:22, 9] = TRACK
+track[15:21, 10] = TRACK
+track[15:20, 11:19] = TRACK
+track[2:13, 21:27] = TRACK
+track[13:17, 26] = TRACK
+track[13:18, 25] = TRACK
+track[13:19, 24] = TRACK
+track[13:20, 20:24] = TRACK
+track[14:20, 19] = TRACK
 
-# Top Left Corner
-track[4:6, 4] = TRACK
-track[3:6, 5] = TRACK
-track[2:6, 6] = TRACK
-track[1:6, 7:9] = TRACK
-track[1:8, 9] = TRACK
-track[1:7, 10] = TRACK
-track[1:6, 11:15] = TRACK
-
-# Top Right Corner
-track[4:6, 25] = TRACK
-track[3:6, 24] = TRACK
-track[2:6, 23] = TRACK
-track[1:6, 21:23] = TRACK
-track[1:8, 20] = TRACK
-track[1:7, 19] = TRACK
-track[1:6, 14:19] = TRACK
-
-# Bottom Left Corner
-track[23:25, 4] = TRACK
-track[23:26, 5] = TRACK
-track[23:27, 6] = TRACK
-track[23:28, 7:9] = TRACK
-track[21:28, 9] = TRACK
-track[22:28, 10] = TRACK
-track[23:28, 11:15] = TRACK
-
-# Bottom Right Corner
-track[23:25, 25] = TRACK
-track[23:26, 24] = TRACK
-track[23:27, 23] = TRACK
-track[23:28, 21:23] = TRACK
-track[21:28, 20] = TRACK
-track[22:28, 19] = TRACK
-track[23:28, 14:19] = TRACK
 
 # Define starting line (a horizontal line on the left)
-track[16, 3:9] = START
-
-# Define wall below the starting line
-track[15, 3:9] = WALL
+track[28, 3:9] = START
 
 # Define finishing line below the wall
-track[14, 3:9] = FINISH
+track[1, 21:27] = FINISH
 
 print(track)
 
 # Save track in npy format
-with open('track_b.npy', 'wb') as f:
+with open('./maps/saved_tracks/track_b.npy', 'wb') as f:
     np.save(f, track)
     
 # Personalized color map
