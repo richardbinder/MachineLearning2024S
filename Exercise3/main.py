@@ -33,7 +33,7 @@ if __name__ == "__main__":
     train = False # Switch between train and evaluation
     track_dir = "./maps/saved_tracks/" # Directory of the track files
     track = 'a' # Track name
-    total_episodes = 10000 # Total number of episodes
+    total_episodes = 1000000 # Total number of episodes
   
     if train:
         track_name = f'Track {track.capitalize()}'
@@ -60,24 +60,29 @@ if __name__ == "__main__":
         
         for i, start_position in enumerate(start_positions):
             track_map = np.copy(env.track_map)
-            position = env.reset()
+            position = env.reset(start_index=i)
             goal_reached = False
             previous_position = None
+            previous__previous_position = None
             
             while not goal_reached:
                 track_map[position[0], position[1]] = 4 
                 action = policy[position]
                 
-                # Check if the car is stuck in the same position with action 4
-                if np.array_equal(position, previous_position) and action == 4:
-                # If stuck, select a different action randomly (except action 4)
-                    action = np.random.choice([0, 1, 2, 3, 5, 6, 7, 8])
-                
                 previous_position = position
+                previous__previous_position = previous_position
     
                 next_position, reward, goal_reached = env.step(action)
                 position = next_position
             
+                # Check if the car is stuck in the same position with action 4
+                if np.array_equal(position, previous_position) and action == 4:
+                # If stuck, select a different action randomly (except action 4)
+                    goal_reached = True 
+                               
+                if np.array_equal(position, previous_position, previous__previous_position) and action == 7:
+                # If stuck, select a different action randomly (except action 4)
+                    goal_reached = True 
             print("goal_reached")
             
             
@@ -87,6 +92,7 @@ if __name__ == "__main__":
             ax = plt.subplot(2, 5, i + 1)
             ax.axis('off')
             ax.imshow(track_map, cmap=cmap)
+            ax.set_title(start_position[1])
            
         plt.tight_layout()
         plt.savefig(f'./results/track_{track}_optimal_trajectories.png')

@@ -8,25 +8,25 @@ START = 2
 FINISH = 3
  
 # Define an array of 30 rows and 60 columns for a wide racetrack
-track = np.full((100, 30), WALL)
+track = np.full((100, 75), WALL)
 
 # Define the cosine curve track
 x = np.linspace(0, 4 * np.pi, 100)  # x values from 0 to 4*pi
-y = (np.cos(x) * 10 + 15).astype(int)  # map cosine values to rows 0 to 29
+y = (np.cos(x) * 10 + 37).astype(int)  # map cosine values to rows 0 to 29
 
 for i in range(98):
-    track[i+1, y[i+1] - 2:y[i+1] + 4] = TRACK  # make the track wider
+    track[i+1, y[i+1] - 8:y[i+1] + 13] = TRACK  # make the track wider
 
 # Define starting line
-track[99, 22:28] = START
+track[99, 38:59] = START
 
 # Define finishing line
-track[0, 22:28] = FINISH
+track[0, 38:59] = FINISH
 
 print(track)
 
 # Save track in npy format
-with open('./saved_tracks/track_c.npy', 'wb') as f:
+with open('./maps/saved_tracks/track_c.npy', 'wb') as f:
     np.save(f, track)
     
 # Personalized color map

@@ -221,6 +221,7 @@ class RaceTrack(Env):
 # For testing, execute the environment with random actions until the goal is reached
 if __name__ == "__main__":
     race_track = RaceTrack(track_dir='./saved_tracks/', track='a', size=20)
+    #race_track = RaceTrack(track_dir='./saved_tracks/', track='c', size=10)
     
     # Initialize state
     race_track.reset()
@@ -256,6 +257,6 @@ if __name__ == "__main__":
         race_track.render()
         
         # Control the frame rate (frames per second)
-        race_track.clock.tick(15)
+        race_track.clock.tick(960)
 
     pygame.quit()
