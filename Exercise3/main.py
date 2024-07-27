@@ -107,7 +107,7 @@ if __name__ == "__main__":
 
         # Calculate number of rows needed for 5 columns per row
         num_positions = len(start_positions)
-        num_cols = 5
+        num_cols = 6
         num_rows = (num_positions + num_cols - 1) // num_cols
         
         fig, axes = plt.subplots(num_rows, num_cols, figsize=(15, num_rows * 3), dpi=150)
