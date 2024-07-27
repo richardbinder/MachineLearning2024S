@@ -66,8 +66,6 @@ if __name__ == "__main__":
         
         size = 10 if track == 'c' else 20
         env = RaceTrack(track_dir=track_dir, track=track, size=size)
-        fig = plt.figure(figsize=(12, 5), dpi=150)
-        fig.suptitle(f'Sample trajectories - Track {track}', size=12, weight='bold')
         
         start_positions = env.start_positions
         routes = []
@@ -102,16 +100,32 @@ if __name__ == "__main__":
             print("goal_reached")
             
             routes.append(route)
-            
-            # Personalized color map
-            cmap = ListedColormap(['#FFFFFF', '#CECFCE', '#FA9884', '#93C695', '#000000'])
-
-            ax = plt.subplot(2, 5, i + 1)
-            ax.axis('off')
-            ax.imshow(track_map, cmap=cmap)
-            ax.set_title(start_position[1])
     
     if plot:
+        # Personalized color map
+        cmap = ListedColormap(['#FFFFFF', '#CECFCE', '#FA9884', '#93C695', '#000000'])
+
+        # Calculate number of rows needed for 5 columns per row
+        num_positions = len(start_positions)
+        num_cols = 5
+        num_rows = (num_positions + num_cols - 1) // num_cols
+        
+        fig, axes = plt.subplots(num_rows, num_cols, figsize=(15, num_rows * 3), dpi=150)
+        fig.suptitle(f'Sample trajectories - Track {track}', size=12, weight='bold')
+
+        for i, (ax, start_position) in enumerate(zip(axes.flat, start_positions)):
+            track_map = np.copy(env.track_map)
+            for position in routes[i]:
+                track_map[position[0], position[1]] = 4
+            
+            ax.axis('off')
+            ax.imshow(track_map, cmap=cmap)
+            ax.set_title(f"Start {start_position[1]}")
+
+        # Turn off any unused subplots
+        for j in range(i + 1, len(axes.flat)):
+            axes.flat[j].axis('off')
+            
         plt.tight_layout()
         plt.savefig(f'./results/track_{track}_optimal_trajectories.png')
         plt.show()
