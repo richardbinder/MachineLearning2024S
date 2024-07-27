@@ -64,7 +64,8 @@ if __name__ == "__main__":
         # Get the greedy policy
         policy = np.argmax(Q, axis=-1)
         
-        env = RaceTrack(track_dir=track_dir, track=track, size=20)
+        size = 10 if track == 'c' else 20
+        env = RaceTrack(track_dir=track_dir, track=track, size=size)
         fig = plt.figure(figsize=(12, 5), dpi=150)
         fig.suptitle(f'Sample trajectories - Track {track}', size=12, weight='bold')
         
@@ -91,13 +92,13 @@ if __name__ == "__main__":
                 position = next_position
             
                 # Check if the car is stuck in the same position with action 4
-                # if np.array_equal(position, previous_position) and action == 4:
+                if np.array_equal(position, previous_position) and action == 4:
                 # If stuck, select a different action randomly (except action 4)
-                    # goal_reached = True 
+                    goal_reached = True 
                                
-                # if np.array_equal(position, previous_position, previous__previous_position) and action == 7:
+                if np.array_equal(position, previous_position, previous__previous_position) and action == 7:
                 # If stuck, select a different action randomly (except action 4)
-                    # goal_reached = True 
+                    goal_reached = True 
             print("goal_reached")
             
             routes.append(route)
