@@ -21,8 +21,10 @@ The project is organized as follows:
 - **`policies/`**:
     - **`soft_behavior_policy.py`**: Contains the `soft_policy` function, which defines a soft behavior policy for the agents in the simulation.
     - **`off_policy_montecarlo.py`**: Implements the off-policy Monte Carlo control algorithm used for training the agents.
+    - **`on_policy_montecarlo.py`**: Implements the on-policy Monte Carlo control algorithm used for training the agents.
 
-- **`results/`**: Directory intended to store the results of the simulations, such as reward histories and policy evaluations.
+- **`results/`**: Directory intended to store the results of the off policy simulations, such as reward histories and policy evaluations.
+- **`results/`**: Directory intended to store the results of the on policy simulations, such as reward histories and policy evaluations.
 
 - **`main.py`**: The main script for training and evaluating the policies. This script handles the overall flow of the project, including training the policies and generating evaluation plots.
 
