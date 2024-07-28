@@ -7,7 +7,11 @@ import pygame
 from matplotlib import pyplot as plt
 from maps.game_environment import RaceTrack
 from policies.off_policy_motecarlo import off_policy_monte_carlo
+from policies.on_policy_motecarlo import on_policy_monte_carlo
 from scipy.ndimage import uniform_filter
+
+
+results_folder = "results"
 
 
 # Plot the result
@@ -26,7 +30,7 @@ def plot_result(reward_hist, track_name, total_episodes) -> None:
     plt.xlabel('Episodes)')
     plt.ylabel('Reward')    
     plt.legend()
-    plt.savefig(f'./results/{"_".join(track_name.lower().split())}.png')
+    plt.savefig(f'./{results_folder}/{"_".join(track_name.lower().split())}.png')
     plt.show()
 
 
@@ -37,6 +41,7 @@ if __name__ == "__main__":
     parser.add_argument('--plot', action='store_true', help='Plot the results')
     parser.add_argument('--sim', action='store_true', help='Run simulations in the environment')
     parser.add_argument('--track', type=str, default='a', help='Track name (a, b or c)')
+    parser.add_argument('--policy', type=str, default='off', help='Monte Carlo policy (on, off)')
 
     args = parser.parse_args()
 
@@ -44,21 +49,28 @@ if __name__ == "__main__":
     plot = args.plot # Save plots of the simulation
     sim = args.sim # Run simulations 
     track_dir = "./maps/saved_tracks/" # Directory of the track files
-    track = args.track # Track name (a, b or c)
-    total_episodes = 1000000 # Total number of episodes
-    
+    track = args.track # Track name (a, b, c or d)
+    policy = args.policy # MC Policy
+    total_episodes = 100000 # Total number of episodes
+
+    if policy == "on":
+        results_folder = "results_on"
+
     if train:
         track_name = f'Track {track.capitalize()}'
-        reward_hist, Q = off_policy_monte_carlo(total_episodes, track_dir, track)
+        if policy == "on":
+            reward_hist, Q = on_policy_monte_carlo(total_episodes, track_dir, track)
+        else:
+            reward_hist, Q = off_policy_monte_carlo(total_episodes, track_dir, track)
         
         plot_result(reward_hist, track_name, total_episodes)
 
-        with open(f'./results/training/track_{track}.pkl', 'wb') as f:
+        with open(f'./{results_folder}/training/track_{track}.pkl', 'wb') as f:
             pickle.dump(Q, f)
 
 
     if plot or sim: # Evaluate the Q values and plot sample paths
-        with open(f'./results/training/track_{track}.pkl', 'rb') as f:
+        with open(f'./{results_folder}/training/track_{track}.pkl', 'rb') as f:
             Q = pickle.load(f)
         
         # Get the greedy policy
@@ -127,7 +139,7 @@ if __name__ == "__main__":
             axes.flat[j].axis('off')
             
         plt.tight_layout()
-        plt.savefig(f'./results/track_{track}_optimal_trajectories.png')
+        plt.savefig(f'./{results_folder}/track_{track}_optimal_trajectories.png')
         plt.show()
 
     if sim:

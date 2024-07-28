@@ -8,7 +8,7 @@ def off_policy_monte_carlo(
     track: str = "a"
 ):
     # Probability of selecting a random action (exploration)
-    epsilon = 0.1
+    epsilon = 0.2
 
     # Discount factor for future rewards
     gamma = 0.9
@@ -97,7 +97,7 @@ def off_policy_monte_carlo(
         reward_hist[i] = total_reward  # Save the total reward in the history
 
         # Print the reward every 1000 episodes
-        if i % 1000 == 0:
+        if i % 10 == 0:
             print(f'Episode: {i}, reward: {total_reward}, epsilon: {epsilon}')
         
     return reward_hist, Q  # Return the reward history and the Q value function
